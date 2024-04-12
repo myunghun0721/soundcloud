@@ -17,7 +17,6 @@ class Song(db.Model):
 
     #relationships
     comments = db.relationship('Comment', back_populates='song')
-    likes = db.relationship('Like', back_populates='song')
 
     def to_dict(self):
         return {
