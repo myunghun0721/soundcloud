@@ -1,4 +1,4 @@
-from .db import db,SCHEMA, environment
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 likes = db.Table(
     'likes',
     db.Model.metadata,
