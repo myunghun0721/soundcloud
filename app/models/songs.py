@@ -1,11 +1,16 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 <<<<<<< HEAD
+<<<<<<< HEAD
 from ..models import playlist_songs, likes
 =======
 from ..models import playlist_songs
 from .like import likes
 >>>>>>> seed-data-for-users
+=======
+from ..models import playlist_songs
+from .like import likes
+>>>>>>> 957d24d6b88b92493060ee8a967466d252413e23
 
 class Song(db.Model):
     __tablename__ = 'songs'
