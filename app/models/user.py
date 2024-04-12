@@ -22,8 +22,8 @@ class User(db.Model, UserMixin):
 
 
     playlists = db.relationship("Playlist", back_populates="user", cascade="all, delete-orphan")
-    songs = db.relationship("Song", back_populates="user", , cascade="all, delete-orphan")
-    comments = db.relationship("Comment", back_populates="user", , cascade="all, delete-orphan")
+    songs = db.relationship("Song", back_populates="user", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan")
 
     # join table relationship
     user_likes = db.relationship("Song", secondary=likes, back_populates="song_likes")
@@ -44,4 +44,9 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'city': self.city,
+            'country': self.country,
+            'bio': self.bio
         }

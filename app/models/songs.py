@@ -16,6 +16,7 @@ class Song(db.Model):
     genre = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     preview_img = db.Column(db.String(255))
+    song_url = db.Column(db.String(255))
 
     #relationships
     comments = db.relationship('Comment', back_populates='song')
@@ -33,5 +34,7 @@ class Song(db.Model):
             'album': self.album,
             'release_date': self.release_date,
             'genre': self.genre,
-            'user_id': self.user_id
+            'user_id': self.user_id,
+            'preview_img': self.preview_img,
+            'song_url': self.song_url
         }
