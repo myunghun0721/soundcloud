@@ -14,7 +14,6 @@ class Comment(db.Model):
     body = db.Column(db.Text)
 
     song = db.relationship("Song", back_populates="comments")
-
     user = db.relationship("User", back_populates="comments")
 
 def to_dict(self):
