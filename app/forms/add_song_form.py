@@ -2,12 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SubmitField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import User
-
-def user_exists(form, field):
-    email = field.data
-    user = User.query.filter(User.email == email).first()
-    if not user:
-        raise ValidationError('User must be logged in to add song.')
+from flask_login import current_user
 
 
 class AddSongForm(FlaskForm):
