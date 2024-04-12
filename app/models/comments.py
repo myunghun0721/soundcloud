@@ -15,5 +15,4 @@ class Comment(db.Model):
 
     song = db.relationship("Song", back_populates="comments")
 
-    user = db.relationship("User", back_populate="comments")
-
+    user = db.relationship("User", back_populates="comments")

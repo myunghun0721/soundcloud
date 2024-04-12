@@ -17,6 +17,11 @@ class Song(db.Model):
 
     #relationships
     comments = db.relationship('Comment', back_populates='song')
+    user = db.relationship("User", back_populates="songs")
+
+    # join table relationship
+    song_likes = db.relationship("User", secondary=likes, back_populates="user_likes")
+    song_to_playlists = db.relationship("Playlist", secondary=playlist_songs, back_populates="playlist_to_songs")
 
     def to_dict(self):
         return {

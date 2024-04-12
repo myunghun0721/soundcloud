@@ -6,6 +6,8 @@ likes = db.Table(
     db.Column("song_id", db.Integer, db.ForeignKey("songs.id"), primary_key=True)
 )
 
+if environment == "production":
+    __table_args__ = {'schema': SCHEMA}
 
 # from .db import db, environment, SCHEMA
 # from flask_sqlalchemy import SQLAlchemy
