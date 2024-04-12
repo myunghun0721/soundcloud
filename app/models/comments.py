@@ -17,3 +17,11 @@ class Comment(db.Model):
 
     user = db.relationship("User", back_populate="comments")
 
+def to_dict(self):
+    return {
+        "id": self.id,
+        "song_id": self.song_id,
+        "user_id": self.user_id,
+        "body": self.body,
+        "created_at": self.created_at.isoformat()
+    }
