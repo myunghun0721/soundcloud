@@ -24,4 +24,3 @@ def to_dict(self):
         "body": self.body,
         "created_at": self.created_at.isoformat()
     }
-    user = db.relationship("User", back_populates="comments")
