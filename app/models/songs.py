@@ -15,6 +15,7 @@ class Song(db.Model):
     release_date = db.Column(db.DateTime, default=datetime.utcnow)
     genre = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    preview_img = db.Column(db.String(255))
 
     #relationships
     comments = db.relationship('Comment', back_populates='song')
