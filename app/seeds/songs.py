@@ -28,3 +28,8 @@ def seed_songs():
         Song(song_url="place holder for song url" title="glisten", artist="Jeremy Zucker", album="Glisten", release_date=datetime(2023, 11,10) genre="indie-pop", user_id=4 preview_img="place holder for img url")
         Song(song_url="place holder for song url" title="better off", artist="Jeremy Zucker", album="Glisten", release_date=datetime(2023, 11,10) genre="indie-pop", user_id=4 preview_img="place holder for img url")
     ]
+
+    for song in songs:
+        db.session.add(song)
+
+    db.session.commit()
