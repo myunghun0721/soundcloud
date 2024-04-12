@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-from ..models import playlist_songs
-
+from .models import playlist_songs, likes
 class Song(db.Model):
     __tablename__ = 'songs'
 
