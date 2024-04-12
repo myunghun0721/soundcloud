@@ -15,6 +15,9 @@ class Playlist(db.Model):
 
     user = db.relationship("User", back_populates="playlists")
 
+    # join table relationship
+    playlist_to_songs = db.relationship("Song", secondary=playlist_songs, back_populates="song_to_playlists")
+
     def to_dict(self):
         return {
             'id': self.id,
