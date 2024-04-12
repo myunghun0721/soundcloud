@@ -1,4 +1,4 @@
-from .db import db
+from .db import db,SCHEMA, environment
 likes = db.Table(
     'likes',
     db.Model.metadata,

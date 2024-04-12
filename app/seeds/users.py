@@ -5,19 +5,19 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        username='Demo', email='demo@aa.io', password='password', first_name='Demo', last_name='App', city='San Francisco', country='United States', bio='Hi this is test user ')
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='marnie', email='marnie@aa.io', password='password',first_name='Demo', last_name='App', city='San Francisco', country='United States', bio='Hi this is test user ')
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='bobbie', email='bobbie@aa.io', password='password',first_name='Demo', last_name='App', city='San Francisco', country='United States', bio='Hi this is test user ')
     thanh = User(
-        username='thanh', email='thanh@aa.io', password='password1')
+        username='thanh', email='thanh@aa.io', password='password1',first_name='Demo', last_name='App', city='Dublin', country='United States', bio='Hi this is test user ')
     justin = User(
-        username='justin', email='justin@aa.io', password='password2')
+        username='justin', email='justin@aa.io', password='password2',first_name='Demo', last_name='App', city='San Jose', country='United States', bio='Hi this is test user ')
     krishna = User(
-        username='krishna', email='krishna@aa.io', password='password3')
+        username='krishna', email='krishna@aa.io', password='password3',first_name='Demo', last_name='App', city='New York', country='United States', bio='Hi this is test user ')
     hun = User(
-        username='hun', email='hun@aa.io', password='password4')
+        username='hun', email='hun@aa.io', password='password4',first_name='Demo', last_name='App', city='San Francisco', country='Ohio', bio='Hi this is test user ')
     
     
 

@@ -1,4 +1,4 @@
-from .db import db
+from .db import db,environment, SCHEMA
 playlist_songs = db.Table(
     'playlist_songs',
     db.Model.metadata,
