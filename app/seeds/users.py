@@ -10,37 +10,22 @@ def seed_users():
         username='marnie', email='marnie@aa.io', password='password')
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password')
-    alice = User(
-        username='alice', email='alice@aa.io', password='password1')
-    ben = User(
-        username='ben', email='ben@aa.io', password='password2')
-    carol = User(
-        username='carol', email='carol@aa.io', password='password3')
-    david = User(
-        username='david', email='david@aa.io', password='password4')
-    eva = User(
-        username='eva', email='eva@aa.io', password='password5')
-    frank = User(
-        username='frank', email='frank@aa.io', password='password6')
-    grace = User(
-        username='grace', email='grace@aa.io', password='password7')
-    henry= User(
-        username='henry', email='henry@aa.io', password='password8')
-    isla = User(
-        username='isla', email='isla@aa.io', password='password9')
-    jake = User(
-        username='jake', email='jake@aa.io', password='password10')
-    kate = User(
-        username='kate', email='kate@aa.io', password='password11')
-    lucas = User(
-        username='lucas', email='lucas@aa.io', password='password12')
+    thanh = User(
+        username='thanh', email='thanh@aa.io', password='password1')
+    justin = User(
+        username='justin', email='justin@aa.io', password='password2')
+    krishna = User(
+        username='krishna', email='krishna@aa.io', password='password3')
+    hun = User(
+        username='hun', email='hun@aa.io', password='password4')
+    
     
 
     
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
-    db.session.add_all([alice,ben,carol, david, eva, frank, grace, henry, isla, jake, kate, lucas])
+    db.session.add_all([thanh, justin, krishna, hun])
     db.session.commit()
 
 
