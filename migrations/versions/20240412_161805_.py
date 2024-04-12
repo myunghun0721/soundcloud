@@ -25,6 +25,8 @@ def upgrade():
     with op.batch_alter_table('songs', schema=None) as batch_op:
         batch_op.add_column(sa.Column('song_url', sa.String(length=255), nullable=True))
 
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
