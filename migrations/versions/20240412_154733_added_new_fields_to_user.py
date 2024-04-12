@@ -73,6 +73,8 @@ def upgrade():
         batch_op.add_column(sa.Column('bio', sa.String(length=255), nullable=False))
 
     # ### end Alembic commands ###
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
