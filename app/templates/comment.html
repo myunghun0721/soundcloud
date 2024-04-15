@@ -1,0 +1,4 @@
+<form method="post" action="/song/{{ songId }}/comments/{{ commentId }}">
+    {{ form.hidden_tag() }}
+    {{form.body.label}}{{form.body}}
+    {{form.submit.label}}{{form.submit}}
