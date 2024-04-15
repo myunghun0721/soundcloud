@@ -1,9 +1,10 @@
 from app.models import db, environment, SCHEMA
+from app.models.like import likes
 from sqlalchemy import text
 
 def seed_likes():
 
-    likes = [
+    likes_data = [
         {"user_id": 1, "song_id": 1},
         {"user_id": 1, "song_id": 2},
         {"user_id": 2, "song_id": 3},
@@ -25,8 +26,8 @@ def seed_likes():
         {"user_id": 2, "song_id": 19},
         {"user_id": 3, "song_id": 20},
     ]
-    for like in likes:
-        db.session.add(like)
+
+    db.session.execute(likes.insert(), likes_data)
     db.session.commit()
 
 def undo_likes():
