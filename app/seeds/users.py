@@ -20,8 +20,6 @@ def seed_users():
         username='hun', email='hun@aa.io', password='password',first_name='hun', last_name='App', city='San Francisco', country='Ohio', bio='Hi this is test user ')
 
 
-
-
     # db.session.add(demo)
     # db.session.add(marnie)
     # db.session.add(bobbie)
