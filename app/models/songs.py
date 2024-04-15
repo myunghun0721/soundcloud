@@ -2,10 +2,6 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from ..models import playlist_songs
 from .like import likes
-<<<<<<< HEAD
-=======
-
->>>>>>> 2d63bd522f50428e97daa4c50e24dca47995169c
 
 class Song(db.Model):
     __tablename__ = 'songs'
