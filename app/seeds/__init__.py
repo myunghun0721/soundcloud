@@ -5,7 +5,7 @@ from .comments import seed_comments, undo_comments
 from .likes import seed_likes, undo_likes
 from app.models.db import db, environment, SCHEMA
 from .playlist import seed_playlist, undo_playlist
-from .playlist_songs import undo_playlist_songs, seed_playlist_songs
+# from .playlist_songs import undo_playlist_songs, seed_playlist_songs
 
 
 # Creates a seed group to hold our commands
@@ -21,7 +21,7 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
-        undo_playlist_songs()
+        # undo_playlist_songs()
         undo_playlist()
         undo_likes()
         undo_comments()
@@ -33,7 +33,7 @@ def seed():
     seed_likes()
     seed_comments()
     seed_playlist()
-    seed_playlist_songs()
+    # seed_playlist_songs()
 
     # Add other seed functions here
 
@@ -42,7 +42,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
 
-    undo_playlist_songs()
+    # undo_playlist_songs()
     undo_playlist()
     undo_likes()
     undo_comments()
