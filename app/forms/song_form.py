@@ -10,4 +10,5 @@ class AddSongForm(FlaskForm):
     release_date = DateField('Release Date')
     genre = StringField('Genre')
     preview_img = StringField('Preview Image URL')
+    song_url = StringField('Song Url')
     submit = SubmitField('Add Song')

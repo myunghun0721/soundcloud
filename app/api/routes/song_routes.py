@@ -32,10 +32,12 @@ def post_song():
             'song_url': form.data['song_url']
         }
 
-    new_song = Song(**params)
-    db.session.add(new_song)
-    db.session.commit()
-    return new_song.to_dict()
+        new_song = Song(**params)
+        db.session.add(new_song)
+        db.session.commit()
+        return new_song.to_dict()
+
+    return {"message": "validation failed"}
 
 @song_routes.route('/<int:songId>', methods=['DELETE'])
 @login_required
@@ -82,8 +84,9 @@ def edit_song(songId):
         song.song_url= form.data['song_url']
 
 
-    db.session.commit()
-    return song.to_dict()
+        db.session.commit()
+        return song.to_dict()
+    return {"message": "validation failed"}
 
 @song_routes.route('/<int:songId>')
 def get_song_details(songId):

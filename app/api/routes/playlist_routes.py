@@ -58,7 +58,8 @@ def post_playlist():
             'user_id': current_user.id
         }
 
-    new_playlist = Playlist(**params)
-    db.session.add(new_playlist)
-    db.session.commit()
-    return new_playlist.to_dict()
+        new_playlist = Playlist(**params)
+        db.session.add(new_playlist)
+        db.session.commit()
+        return new_playlist.to_dict()
+    return {"message": "validation failed"}
