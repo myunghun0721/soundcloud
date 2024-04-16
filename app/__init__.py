@@ -32,18 +32,15 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-<<<<<<< HEAD
 app.register_blueprint(comment_routes, url_prefix='/song/<int:songId>')
 app.register_blueprint(likes_routes, url_prefix='/song/<int:songId>')
 app.register_blueprint(current_likes, url_prefix='/song/likes/user')
-=======
 
 # song route
 app.register_blueprint(song_routes, url_prefix='/api/songs')
 # playlist route
 app.register_blueprint(playlist_routes, url_prefix='/api/playlists')
 
->>>>>>> e1423a968d43acf4469efed56ef1dffe492d8078
 db.init_app(app)
 Migrate(app, db)
 
