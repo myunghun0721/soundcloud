@@ -25,15 +25,13 @@ def post_comment(songId):
         db.session.add(comment)
         db.session.commit()
         return jsonify(comment.to_dict())
-
     else:
-        return render_template("test.html", form=form, songId=songId)
+        return jsonify("validation failed"),404
 
 @comment_routes.route('/comments/<int:commentId>', methods=['GET','POST'])
 def update_comment(songId, commentId):
     form = AddCommentForm()
     comment = Comment.query.filter_by(id=commentId, song_id=songId).first()
-
     if request.method=="GET":
         comment_data = {
             'body': comment.body
@@ -46,8 +44,9 @@ def update_comment(songId, commentId):
         db.session.add(comment)
         db.session.commit()
         return jsonify(comment.to_dict())
+    else:
+        return jsonify("form not validated")
 
-    return render_template("comment.html", form=form, commentId=commentId, songId=songId)
 
 @comment_routes.route('/comments/<int:commentId>/delete', methods=['DELETE'])
 @login_required
