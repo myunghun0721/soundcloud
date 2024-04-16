@@ -1,3 +1,52 @@
+#root {
+  margin: 15px;
+}
+
+.homeImg {
+  width: 50px;
+  height: 50px;
+}
+
 .profile-dropdown {
   position: absolute;
+  right: 22px;
+  border: 1px solid;
+  width: auto;
+  padding: 10px;
+  top: 70px;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  z-index: 1;
+}
+
+.div-login,
+.div-sign-up {
+  text-align: center;
+  color: #938776;
+}
+.div-login:hover,
+.div-sign-up:hover {
+ color: #3b362f;
+}
+
+.profile-dropdown {
+  margin: 0;
+  list-style-type: none
+}
+.hidden {
+  display: none;
+}
+
+.div-navigation-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.div-navigation-a-user{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
 }
