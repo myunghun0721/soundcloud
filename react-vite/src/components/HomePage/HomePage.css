@@ -1,3 +1,68 @@
-h1{
-    color: aqua;
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    gap: 40px;
+    width: 100%;
+    margin-left: 10px;
+
+}
+
+.grid-item {
+    position: relative;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-item img {
+    width: 100%;
+}
+
+.img-div {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+.all-songs {
+    padding: 10px;
+}
+
+.all-songs h1 {
+    margin-bottom: 10px;
+}
+.song-info {
+    color: white !important;
+}
+.song-info a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+    justify-content: center;
+    margin-left: 5px;
+}
+.song-info a:visited {
+    color: rgb(255, 255, 255);
+}
+
+.song-info a:hover {
+    color: #ff5500
+}
+
+.song-info a:link {
+    color: rgb(255, 255, 255);
+}
+.play {
+    position: absolute;
+    left: 35%;
+    top: 30%;
+    font-size: 100px;
+    display: none;
+    cursor: pointer;
+}
+
+.img-div:hover .play {
+    display: block;
 }

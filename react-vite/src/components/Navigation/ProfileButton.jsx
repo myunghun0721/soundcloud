@@ -5,6 +5,11 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { LuMusic2 } from "react-icons/lu";
+import { FaHeart } from "react-icons/fa";
+import { PiPlaylistFill } from "react-icons/pi";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -39,17 +44,21 @@ function ProfileButton() {
     closeMenu();
   };
 
+  const navigate = useNavigate()
   return (
     <>
-      <button onClick={toggleMenu}>
+      <button className="nav-user-button" onClick={toggleMenu}>
         <FaUserCircle />
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <li>Hello, {user.username}</li>
-              <li>{user.email}</li>
+              <NavLink to='/'><li><CgProfile /> Profile</li></NavLink>
+              <NavLink to='/'><li><LuMusic2 /> Songs</li></NavLink>
+              <NavLink to='/'><li><FaHeart /> Likes</li></NavLink>
+              <NavLink to='/'><li><PiPlaylistFill /> Playlists</li></NavLink>
+              <hr></hr>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>

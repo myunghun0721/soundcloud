@@ -5,7 +5,6 @@ import "./Navigation.css";
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
-  console.log("🚀 ~ Navigation ~ sessionUser:", sessionUser)
 
   return (
     <div className='div-navigation-wrapper'>
@@ -13,6 +12,7 @@ function Navigation() {
         <NavLink to="/">
           <img className='homeImg'src='../../../public/favicon.ico' alt='Home img'></img>
         </NavLink>
+          <h1>SoundCloud</h1>
       </div>
 
       <div className='div-navigation-a-user'>
