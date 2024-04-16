@@ -17,7 +17,7 @@ function HomePage() {
       <p>this is test page</p>
       <div>
         {songs.map(song => {
-          console.log(song)
+          // console.log(song)
           return <div key={song.id}>{song.title}</div>
         }
         )}
