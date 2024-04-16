@@ -33,7 +33,7 @@ def post_comment(songId):
 def update_comment(songId, commentId):
     form = AddCommentForm()
     comment = Comment.query.filter_by(id=commentId, song_id=songId).first()
-    print(comment)
+
     if request.method=="GET":
         comment_data = {
             'body': comment.body

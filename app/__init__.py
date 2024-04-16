@@ -10,6 +10,7 @@ from .api.auth_routes import auth_routes
 from .seeds import seed_commands
 from .config import Config
 from .api.routes.comments_routes import comment_routes
+from .api.routes.likes_routes import likes_routes
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
@@ -30,6 +31,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(comment_routes, url_prefix='/song/<int:songId>')
+app.register_blueprint(likes_routes, url_prefix='/song/<int:songId>')
 db.init_app(app)
 Migrate(app, db)
 
