@@ -19,7 +19,10 @@ def users():
 @login_required
 def user(id):
     """
-    Query for a user by id and returns that user in a dictionary
+    Query for a user by id and returns that user in a dictionary.
+    If no user is found, returns a JSON error message.
     """
     user = User.query.get(id)
-    return user.to_dict()
+    if user is None:
+        return jsonify({'error': 'User not found'}), 404
+    return jsonify(user.to_dict())
