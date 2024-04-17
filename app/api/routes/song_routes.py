@@ -93,7 +93,7 @@ def get_song_details(songId):
     song = Song.query.get(songId)
 
     if not song:
-        return {"message": "song not found"}
+        return {"message": "song not found"}, 404
 
     return song.to_dict()
 
