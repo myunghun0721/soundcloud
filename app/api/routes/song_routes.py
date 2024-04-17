@@ -8,6 +8,7 @@ from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_
 song_routes = Blueprint('songs', __name__)
 
 @song_routes.route('/')
+@login_required
 def song_index():
     songs = Song.query.all()
     print(songs)

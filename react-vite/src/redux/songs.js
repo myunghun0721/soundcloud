@@ -11,7 +11,7 @@ export const uploadSong = song =>({
 })
 
 export const thunkFetchSongs = () => async dispatch => {
-    const res = await fetch('/api/songs')
+    const res = await fetch('/api/songs/')
 
     if(res.ok){
         const songs = await res.json()
@@ -20,7 +20,7 @@ export const thunkFetchSongs = () => async dispatch => {
 }
 export const thunkUploadSongs = (song) => async dispatch => {
     console.log("before res")
-    const res = await fetch('/api/songs',{
+    const res = await fetch('/api/songs/',{
         method: 'POST',
         body: song
     })
