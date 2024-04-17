@@ -34,12 +34,19 @@ const SongDetails = () => {
 
     },[dispatch, songId])
 
-    let releaseDate = song?.release_date
-    releaseDate = new Date(releaseDate).toLocaleDateString("en-US", {
-        year:"numeric",
-        month:"long",
-        day:"numeric"
-    })
+
+    let releaseDate 
+    if (song){
+        releaseDate = song.release_date
+        releaseDate = new Date(releaseDate).toLocaleDateString("en-US", {
+            year:"numeric",
+            month:"long",
+            day:"numeric"
+        })
+
+    }
+    
+    console.log(releaseDate)
     
 
     return (
@@ -48,7 +55,7 @@ const SongDetails = () => {
             <h3>{song?.artist}</h3>
             <h3>{song?.genre}</h3>
             <h3>{song?.album}</h3>
-            <h3>{releaseDate}</h3>
+            {releaseDate && <h3>{releaseDate}</h3>}
             {errors.message && <h1>{errors.message}</h1>}
             <section>
                 <h3>Comments</h3>
