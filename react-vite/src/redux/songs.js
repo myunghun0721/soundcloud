@@ -29,7 +29,7 @@ export const thunkFetchSongs = () => async dispatch => {
 
 export const thunkFetchSongById = (songId) => async dispatch => {
     const res = await fetch(`/api/songs/${songId}`)
-    console.log(res)
+    // console.log(res)
     const song = await res.json()
     // console.log("this is the song from store:", song)
     dispatch(loadSongById(song))
