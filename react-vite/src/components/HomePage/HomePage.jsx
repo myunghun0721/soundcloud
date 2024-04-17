@@ -1,38 +1,39 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkFetchSongs } from "../../redux/songs"
 import "./HomePage.css"
 import { NavLink, useNavigate } from "react-router-dom"
 import { FaCirclePlay } from "react-icons/fa6";
+// import Footer from "../Footer"
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 
 function HomePage() {
   const dispatch = useDispatch();
   const songObj = useSelector(state => state.songs)
   const songs = Object.values(songObj)
+  const [selectedSong, setSelectedSong] = useState(null);
 
   useEffect(() => {
     dispatch(thunkFetchSongs())
+  }, [dispatch, selectedSong])
 
-  }, [dispatch])
-
-  function playSong(song){
-
-    console.log(song.title)
-    console.log(song.song_url)
-    //
+  function playSong(song) {
+    setSelectedSong(song);
   }
 
   return (
     <div className="all-songs">
       <h1>SoundCloud Songs</h1>
       <div className="song-grid">
-        {songs.map(song => {
-          // console.log(song)
-          return <div className='grid-item' key={song.id}>
-            <div onClick={()=>playSong(song)} className="img-div">
-              <div className="play"><FaCirclePlay /></div>
-              <img src="https://placehold.co/400" />
+        {songs.map((song) => (
+          <div className="grid-item" key={song.id}>
+            <div className="img-div">
+              <div onClick={() => playSong(song)} className="play">
+                <FaCirclePlay />
+              </div>
+              <img src="https://placehold.co/400" alt="" />
             </div>
             <div className="song-info">
               <NavLink to={"/songs/" + song.id}>
@@ -41,11 +42,20 @@ function HomePage() {
               </NavLink>
             </div>
           </div>
-        }
-        )}
+        ))}
       </div>
+      {selectedSong && (
+        <div className="footer">
+          <AudioPlayer
+            autoPlay
+            // src={selectedSong.song_url}
+            src="https://media.bgmstore.net/mp3/zcvFY.mp3"
+            onPlay={(e) => console.log(e)}
+            // other props here
+          />
+        </div>
+      )}
     </div>
-
   );
 }
 
