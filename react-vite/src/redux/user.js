@@ -1,5 +1,6 @@
 export const LOAD_USER = 'user/loadUser';
 export const FETCH_SONGS = 'FETCH_SONGS'
+export const FETCH_PLAYLISTS = '/FETCH_PLAYLISTS'
 
 export const loadUser = user => ({
     type: LOAD_USER,
@@ -9,6 +10,11 @@ export const loadUser = user => ({
 export const fetchSongs = songs => ({
     type: FETCH_SONGS,
     payload: songs
+})
+
+export const fetchPlaylists = playlists => ({
+    type: FETCH_PLAYLISTS,
+    payload: playlists
 })
 
 //thunk for fetch user
@@ -30,6 +36,13 @@ export const thunkFetchSongs = () => async dispatch => {
     }
 }
 
+export const thunkFetchPlaylists = () => async dispatch => {
+    const response = await fetch('/api/playlists/user/current');
+    if (response.ok) {
+        const playlists = await response.json();
+        dispatch(fetchPlaylists(playlists));
+    }
+};
 
 const initialState = {};
 
@@ -44,6 +57,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 songs:action.payload
+            }
+        case FETCH_PLAYLISTS:
+            return {
+                ...state,
+                playlists: action.payload
             }
         default:
             return state;

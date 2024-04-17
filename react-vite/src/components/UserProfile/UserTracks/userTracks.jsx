@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkFetchSongs } from "../../redux/user";
+import { thunkFetchSongs } from "../../../redux/user";
+import './userTracks.css'
 
 const UserTracks = () => {
     const dispatch = useDispatch();
@@ -10,20 +11,23 @@ const UserTracks = () => {
         dispatch(thunkFetchSongs());
     }, [dispatch]);
 
-    // Render the songs
     return (
-        <div>
+        <div className="user-songs-container">
             <h2>User Songs</h2>
             {songs ? (
-                <ul>
+                <div className="songs-grid">
                     {songs.map(song => (
-                        <li key={song.id}>
-                            {song.title} by {song.artist}
-                        </li>
+                        <div key={song.id} className="song-item">
+                            <img src="https://placehold.co/400" alt={`Placeholder for ${song.title}`} />
+                            <div className="song-details">
+                                <div className="song-title">{song.title}</div>
+                                <div className="song-artist">by {song.artist}</div>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
             ) : (
-                <p>Loading songs...</p>
+                <p className="loading-text">Loading songs...</p>
             )}
         </div>
     );

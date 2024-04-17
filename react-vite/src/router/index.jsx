@@ -5,6 +5,7 @@ import HomePage from '../components/HomePage';
 import Layout from './Layout';
 import UserProfile from '../components/UserProfile/profile';
 import LoginFormPage from '../components/LoginFormPage/LoginFormPage';
+import UserTracks from '../components/UserProfile/UserTracks/userTracks';
 
 export const router = createBrowserRouter([
   {
@@ -15,12 +16,18 @@ export const router = createBrowserRouter([
         element: <HomePage/>,
       },
       {
-        path:"/user/:userId",
-        element: <UserProfile/>
-      },
-      {
         path: "/login",
         element: <LoginFormPage />,
+      },
+      {
+        path: "/user/:userId",
+        element: <UserProfile />,
+        children: [
+          {
+            path: "tracks",
+            element: <UserTracks />
+          },
+        ]
       },
       // {
       //   path: "/signup",
