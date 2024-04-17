@@ -15,9 +15,7 @@ export const loadCommentsBySongId = comments => ({
 // fetch all the comments by song id
 export  const thunkFetchComments = (songId) => async dispatch => {
     const res = await fetch(`/api/song/${songId}/comments`)
-    console.log("this is the res from store", res)
     const comments = await res.json()
-    console.log("This is the comments from store redux",comments)
     dispatch(loadCommentsBySongId(comments))
     return comments
 }

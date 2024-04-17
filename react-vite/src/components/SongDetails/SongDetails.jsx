@@ -2,7 +2,9 @@ import { useEffect,useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkFetchSongById } from "../../redux/songs"
 import { thunkFetchComments } from "../../redux/comments"
+import { thunkFetchLikes } from "../../redux/likes"
 import { useParams } from 'react-router-dom'
+
 
 import "./SongDetails.css"
 
@@ -18,6 +20,9 @@ const SongDetails = () => {
     //Retrieve comments from redux store
     const commentsObj = useSelector(state => state.comments)
     const comments = Object.values(commentsObj)
+    // Retrieve likes from redux store
+    const likesObj = useSelector(state => state.likes)
+    const likes = Object.values(likesObj)
 
    // fetch the song by it id from backend server
     useEffect (() => {
@@ -31,11 +36,13 @@ const SongDetails = () => {
         })
         // Retreview comments of the Song
         dispatch(thunkFetchComments(parseInt(songId)))
+        dispatch(thunkFetchLikes(parseInt(songId)))
 
     },[dispatch, songId])
 
 
     let releaseDate 
+    // if song exist. Format the relase date
     if (song){
         releaseDate = song.release_date
         releaseDate = new Date(releaseDate).toLocaleDateString("en-US", {
@@ -55,6 +62,7 @@ const SongDetails = () => {
             <h3>{song?.artist}</h3>
             <h3>{song?.genre}</h3>
             <h3>{song?.album}</h3>
+            <h3>likes: {likes}</h3>
             {releaseDate && <h3>{releaseDate}</h3>}
             {errors.message && <h1>{errors.message}</h1>}
             <section>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-audio-player": "^0.17.0",
+    "react-h5-audio-player": "^3.9.1"
+  }
+}
