@@ -23,6 +23,4 @@ def user(id):
     If no user is found, returns a JSON error message.
     """
     user = User.query.get(id)
-    if user is None:
-        return jsonify({'error': 'User not found'}), 404
-    return jsonify(user.to_dict())
+    return user.to_dict()

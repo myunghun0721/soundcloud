@@ -1,27 +1,34 @@
 export const LOAD_USER = 'user/loadUser';
+export const FETCH_SONGS = 'FETCH_SONGS'
 
 export const loadUser = user => ({
     type: LOAD_USER,
     payload: user
 });
 
-export const thunkFetchUser = (id) => async dispatch => {
-    try {
-        const response = await fetch(`/api/users/${id}`);
+export const fetchSongs = songs => ({
+    type: FETCH_SONGS,
+    payload: songs
+})
+
+//thunk for fetch user
+export const thunkFetchUser = (userId) => async dispatch => {
+
+        const response = await fetch(`/api/users/${userId}`);
         if (response.ok) {
             const user = await response.json();
+            console.log("response", response)
             dispatch(loadUser(user));
-        } else {
-            console.error("Failed to fetch user, status:", response.status);
-            const errorResponse = await response.text();  // This line helps to read the textual response which might indicate what went wrong
-            console.error("Error response body:", errorResponse);
-            throw new Error(`Failed to fetch user: ${response.status}`);
         }
-    } catch (error) {
-        console.error('Exception when fetching user:', error);
-        throw error;
-    }
 };
+
+export const thunkFetchSongs = () => async dispatch => {
+    const response = await fetch('/api/songs/user/current')
+    if (response.ok){
+        const songs = await response.json();
+        dispatch(fetchSongs(songs))
+    }
+}
 
 
 const initialState = {};
@@ -31,8 +38,13 @@ const userReducer = (state = initialState, action) => {
         case LOAD_USER:
             return {
                 ...state,
-                users: action.payload
+                [action.payload.id]: action.payload
             };
+        case FETCH_SONGS:
+            return {
+                ...state,
+                songs:action.payload
+            }
         default:
             return state;
     }
