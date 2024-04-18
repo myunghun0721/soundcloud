@@ -20,21 +20,20 @@ export const thunkFetchSongs = () => async dispatch => {
 }
 export const thunkUploadSongs = (song) => async dispatch => {
     console.log("before res")
-    const res = await fetch('/api/songs',{
+    const res = await fetch('/api/songs/new',{
         method: 'POST',
         body: song
     })
     console.log("After res")
     if(res.ok){
         console.log("thunk res ok")
-        const song= await res.json()
+        const song = await res.json()
         // dispatch(uploadSong(song))
     }
     else{
         return "song thunk error"
     }
 }
-
 
 const songReducer = (state={}, action) =>{
     switch(action.type){
