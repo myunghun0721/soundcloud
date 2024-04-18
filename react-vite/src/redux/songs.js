@@ -1,11 +1,26 @@
+
+// Action type constanst
 const LOAD_SONGS = 'songs/loadSongs';
+<<<<<<< HEAD
 const FETCH_SONGS_BY_ID = "FETCH_SONGS_BY_ID"
+=======
+const LOAD_SONG_BY_ID = 'songs/loadSongById'
+
+
+// Action  creators for loading data
+const UPLOAD_SONG = 'songs/uploadSong';
+>>>>>>> 7bd86857c48f63af761e30773e2f841ef8271cc9
 
 export const loadSongs = songs => ({
     type: LOAD_SONGS,
     payload: songs
 })
+export const uploadSong = song =>({
+    type: UPLOAD_SONG,
+    payload: song
+})
 
+<<<<<<< HEAD
 export const fetchSongsById = song => ({
     type: FETCH_SONGS_BY_ID,
     payload: song
@@ -20,6 +35,15 @@ export const thunkFetchSongsById = (songId) => async dispatch => {
     }
 }
 
+=======
+export const loadSongById = song => ({
+    type: LOAD_SONG_BY_ID,
+    payload: song
+})
+
+
+// Thunk actions
+>>>>>>> 7bd86857c48f63af761e30773e2f841ef8271cc9
 export const thunkFetchSongs = () => async dispatch => {
     const res = await fetch('/api/songs/')
 
@@ -28,7 +52,30 @@ export const thunkFetchSongs = () => async dispatch => {
         dispatch(loadSongs(songs))
     }
 }
+export const thunkUploadSongs = (song) => async dispatch => {
+    const res = await fetch('/api/songs/new',{
+        method: 'POST',
+        body: song
+    })
+    if(res.ok){
+        const song = await res.json()
+        dispatch(uploadSong(song))
+        return song
+    }
+    else{
+        return "song thunk error"
+    }
+}
 
+export const thunkFetchSongById = (songId) => async dispatch => {
+    const res = await fetch(`/api/songs/${songId}`)
+    // console.log(res)
+    const song = await res.json()
+    // console.log("this is the song from store:", song)
+    dispatch(loadSongById(song))
+    return song
+
+}
 
 const songReducer = (state={}, action) =>{
     switch(action.type){
@@ -39,11 +86,25 @@ const songReducer = (state={}, action) =>{
             // console.log("====>",newSongsState)
             return newSongsState
         }
+<<<<<<< HEAD
         case FETCH_SONGS_BY_ID:
         return {
             ...state,
             [action.payload.songId]: action.payload
         }
+=======
+        case LOAD_SONG_BY_ID: {
+            return {...state, [action.payload.id]: action.payload}
+        }
+
+        case UPLOAD_SONG: {
+            const newSongsState = {...state}
+            newSongsState[action.payload.id] = action.payload
+            // console.log("🚀 ~ songReducer ~ newSongsState:", newSongsState)
+            return newSongsState
+        }
+
+>>>>>>> 7bd86857c48f63af761e30773e2f841ef8271cc9
         default:
             return state
     }

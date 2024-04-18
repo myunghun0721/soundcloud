@@ -1,0 +1,98 @@
+h5{
+    color: red;
+    padding-left: 7px;
+}
+.song-form{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin: 0 30px 0 30px;
+    flex-direction: column;
+    height: 100vh;
+    padding: 15px;
+    background-color: white;
+}
+.form-uploadsong{
+    width: 90%;
+}
+.header-div{
+    margin-bottom: 20px;
+    background-color: #F5F5F5;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 0 5px 0;
+}
+.body-div{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #e4e4e4;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0;
+}
+
+.left-div{
+    width: 30%;
+    height: 150px;
+    border: 1px solid #c7c7c7;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    margin-top: 50px;
+    flex-direction: column;
+    padding: 10px;
+}
+.left-div label{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.left-div input {
+    visibility:hidden;
+}
+.right-div{
+    margin-top: 10px;
+    width: auto;
+    height: auto;
+}
+
+.right-div label{
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-weight: bold;
+}
+.right-div input{
+    height: 30px;
+    cursor: pointer;
+}
+.submit-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit-div button {
+    border: none;
+    margin: 15px;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    background-color: #ff5500;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 2px 2px 7px 2px;
+}
+.submit-div button:hover {
+    color: white;
+
+}
+.select-song{
+    cursor: pointer;
+}
