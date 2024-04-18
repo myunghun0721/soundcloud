@@ -41,7 +41,7 @@ const SongDetails = () => {
     },[dispatch, songId])
 
 
-    let releaseDate 
+    let releaseDate
     // if song exist. Format the relase date
     if (song){
         releaseDate = song.release_date
@@ -52,9 +52,9 @@ const SongDetails = () => {
         })
 
     }
-    
+
     console.log(releaseDate)
-    
+
 
     return (
         <div>
