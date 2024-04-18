@@ -1,15 +1,12 @@
 
 // Action type constanst
 const LOAD_SONGS = 'songs/loadSongs';
-<<<<<<< HEAD
 const FETCH_SONGS_BY_ID = "FETCH_SONGS_BY_ID"
-=======
 const LOAD_SONG_BY_ID = 'songs/loadSongById'
 
 
 // Action  creators for loading data
 const UPLOAD_SONG = 'songs/uploadSong';
->>>>>>> 7bd86857c48f63af761e30773e2f841ef8271cc9
 
 export const loadSongs = songs => ({
     type: LOAD_SONGS,
@@ -20,7 +17,6 @@ export const uploadSong = song =>({
     payload: song
 })
 
-<<<<<<< HEAD
 export const fetchSongsById = song => ({
     type: FETCH_SONGS_BY_ID,
     payload: song
@@ -35,7 +31,6 @@ export const thunkFetchSongsById = (songId) => async dispatch => {
     }
 }
 
-=======
 export const loadSongById = song => ({
     type: LOAD_SONG_BY_ID,
     payload: song
@@ -43,7 +38,6 @@ export const loadSongById = song => ({
 
 
 // Thunk actions
->>>>>>> 7bd86857c48f63af761e30773e2f841ef8271cc9
 export const thunkFetchSongs = () => async dispatch => {
     const res = await fetch('/api/songs/')
 
@@ -86,13 +80,11 @@ const songReducer = (state={}, action) =>{
             // console.log("====>",newSongsState)
             return newSongsState
         }
-<<<<<<< HEAD
         case FETCH_SONGS_BY_ID:
         return {
             ...state,
             [action.payload.songId]: action.payload
         }
-=======
         case LOAD_SONG_BY_ID: {
             return {...state, [action.payload.id]: action.payload}
         }
@@ -104,7 +96,6 @@ const songReducer = (state={}, action) =>{
             return newSongsState
         }
 
->>>>>>> 7bd86857c48f63af761e30773e2f841ef8271cc9
         default:
             return state
     }
