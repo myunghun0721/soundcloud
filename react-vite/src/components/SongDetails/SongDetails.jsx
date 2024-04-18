@@ -65,13 +65,17 @@ const SongDetails = () => {
             <h3>likes: {likes}</h3>
             {releaseDate && <h3>{releaseDate}</h3>}
             {errors.message && <h1>{errors.message}</h1>}
-            <section>
+            {/* Comments only display if song is found */}
+            {song &&<section>
                 <h3>Comments</h3>
-                {comments?.map(comment => (
+                {comments?.length > 0 ? (
+                comments.map(comment => (
                     <p key={comment.id}>{comment.body}</p>
-                ))}
+                ))
+                // if there comments is an empty array will display no comment yet here
+                ): ( <p>No comments yet.</p>) }
 
-            </section>
+            </section>}
         </div>
     )
 }
