@@ -4,7 +4,6 @@ import "./SongFormPage.css"
 import { thunkUploadSongs } from "../../redux/songs";
 import { useNavigate } from "react-router-dom";
 
-
 function SongFormPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -51,15 +50,11 @@ function SongFormPage() {
       formData.append('preview_img', previewImg)
       formData.append('song_url', song)
 
-
-      dispatch(thunkUploadSongs(formData))
-
       setImageLoading(false)
-      // for (const value of formData.values()) {
-      //   console.log(value);
-      // }
-      // console.log("🚀 ~ handleSubmit ~ formData:", formData)
       setError({})
+
+      dispatch(thunkUploadSongs(formData)).then(newSong => navigate(`/songs/${newSong.id}`))
+
     }
     // const formSubmit = {
     //   title,

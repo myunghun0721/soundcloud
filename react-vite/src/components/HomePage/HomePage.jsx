@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkFetchSongs } from "../../redux/songs"
 import "./HomePage.css"
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { FaCirclePlay } from "react-icons/fa6";
 // import Footer from "../Footer"
 import AudioPlayer from 'react-h5-audio-player';
@@ -33,7 +33,8 @@ function HomePage() {
               <div onClick={() => playSong(song)} className="play">
                 <FaCirclePlay />
               </div>
-              <img src="https://placehold.co/400" alt="" />
+              <img src={song.preview_img ? song.preview_img : "../../public/soundcloud-icon.png"} alt="" />
+              {/* <img src={"../../public/soundcloud-icon.png"} alt="" /> */}
             </div>
             <div className="song-info">
               <NavLink to={"/songs/" + song.id}>
@@ -44,14 +45,16 @@ function HomePage() {
           </div>
         ))}
       </div>
+      <br></br>
+
       {selectedSong && (
         <div className="footer">
           <AudioPlayer
             autoPlay
             // src={selectedSong.song_url}
-            src="https://media.bgmstore.net/mp3/zcvFY.mp3"
+            src={selectedSong.song_url ? selectedSong.song_url : "../../public/demosong.mp3"}
             onPlay={(e) => console.log(e)}
-            // other props here
+          // other props here
           />
         </div>
       )}
