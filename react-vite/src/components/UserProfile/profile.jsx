@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkFetchUser } from "../../redux/user";
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './profile.css';
 import UserTracks from "./UserTracks/userTracks";
 import UserPlaylists from "./UserPlaylists/userPlaylists";
@@ -26,17 +26,17 @@ const PopupForm = ({ user, onClose }) => {
 
 
 const UserProfile = () => {
-    const { userId } = useParams();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.users);
+    const user = useSelector(state => state.users.users);
     const location = useLocation();
     const [showTracks, setShowTracks] = useState(true);
     const [showDetails, setShowDetails] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
+    console.log("this is my user", user)
 
     useEffect(() => {
-        dispatch(thunkFetchUser(parseInt(userId)));
-    }, [dispatch, userId, location]);
+        dispatch(thunkFetchUser());
+    }, [dispatch, location]);
 
     const toggleTracks = (e) => {
         e.preventDefault();

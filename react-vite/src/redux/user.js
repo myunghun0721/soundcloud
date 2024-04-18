@@ -44,7 +44,11 @@ export const thunkFetchPlaylists = () => async dispatch => {
     }
 };
 
-const initialState = {};
+const initialState = {
+    users: null,
+    songs: [],
+    playlists: []
+};
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {

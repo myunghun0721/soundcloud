@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import User
 
 user_routes = Blueprint('users', __name__)
@@ -17,7 +17,7 @@ def users():
 
 @user_routes.route('/current')
 @login_required
-def user(id):
+def user():
     """
     Query for a user by id and returns that user in a dictionary.
     If no user is found, returns a JSON error message.
