@@ -45,7 +45,11 @@ function ProfileButton() {
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+  const navigate = useNavigate()
+>>>>>>> parent of 7bd8685 (fix conflict)
 =======
   const navigate = useNavigate()
 >>>>>>> parent of 7bd8685 (fix conflict)
