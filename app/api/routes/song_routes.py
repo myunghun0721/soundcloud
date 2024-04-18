@@ -8,7 +8,6 @@ from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_
 song_routes = Blueprint('songs', __name__)
 
 @song_routes.route('/')
-@login_required
 def song_index():
     songs = Song.query.all()
     print(songs)
@@ -16,40 +15,40 @@ def song_index():
     return [song.to_dict() for song in songs]
 
 @song_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def post_song():
-    print("=========from song route===============")
-    # form = AddSongForm()
+    form = AddSongForm()
+    form['csrf_token'].data =request.cookies['csrf_token']
 
-    # form['csrf_token'].data =request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print("============================")
 
-    # if form.validate_on_submit():
+        # song_url = form.data["song_url"]
+        # song_url.filename = get_unique_filename(song_url.filename)
+        # song_upload = upload_file_to_s3(song_url)
+        # print("--->", song_url)
 
-    #     song_url = form.data["song_url"]
-    #     song_url.filename = get_unique_filename(song_url.filename)
-    #     song_upload = upload_file_to_s3(song_url)
-    #     print("--->", song_url)
+        # preview_img = form.data['preview_img']
+        # if(preview_img):
+        #     preview_img.filename = get_unique_filename(preview_img.filename)
+        #     preview_img_upload = upload_file_to_s3(preview_img)
 
-    #     preview_img = form.data['preview_img']
-    #     if(preview_img):
-    #         preview_img.filename = get_unique_filename(preview_img.filename)
-    #         preview_img_upload = upload_file_to_s3(preview_img)
+        # params = {
+        #     'title' : form.data['title'],
+        #     'artist' : form.data['artist'],
+        #     'album' : form.data['album'],
+        #     'release_date' : form.data['release_date'],
+        #     'genre' : form.data['genre'],
+        #     'user_id': current_user.id,
+        #     # 'preview_img' : preview_img_upload['url'] if preview_img else None,
+        #     # 'song_url': song_upload['url']
+        # }
 
-    #     params = {
-    #         'title' : form.data['title'],
-    #         'artist' : form.data['artist'],
-    #         'album' : form.data['album'],
-    #         'release_date' : form.data['release_date'],
-    #         'genre' : form.data['genre'],
-    #         'user_id': current_user.id,
-    #         'preview_img' : preview_img_upload['url'] if preview_img else None,
-    #         'song_url': song_upload['url']
-    #     }
-
-    #     new_song = Song(**params)
-    #     db.session.add(new_song)
-    #     db.session.commit()
-    #     return new_song.to_dict()
+        # new_song = Song(**params)
+        # db.session.add(new_song)
+        # db.session.commit()
+        # return new_song.to_dict()
+        return {"message": "test"}
 
     return {"message": "validation failed"}, 401
 

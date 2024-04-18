@@ -11,7 +11,7 @@ export const uploadSong = song =>({
 })
 
 export const thunkFetchSongs = () => async dispatch => {
-    const res = await fetch('/api/songs/')
+    const res = await fetch('/api/songs')
 
     if(res.ok){
         const songs = await res.json()
@@ -28,7 +28,7 @@ export const thunkUploadSongs = (song) => async dispatch => {
     if(res.ok){
         console.log("thunk res ok")
         const song= await res.json()
-        // dispatch(uploadSong(song))
+        dispatch(uploadSong(song))
     }
     else{
         return "song thunk error"
