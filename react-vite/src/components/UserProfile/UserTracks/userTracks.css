@@ -60,3 +60,8 @@
     color: #888;
     width: 100%;
 }
+.deleteButton{
+    list-style-type: none;
+    width: 70px;
+    height: 35px;
+}

@@ -6,7 +6,12 @@ const LOAD_SONG_BY_ID = 'songs/loadSongById'
 
 // Action  creators for loading data
 const UPLOAD_SONG = 'songs/uploadSong';
+const DELETE_SONG = 'songs/deleteSong';
 
+export const deleteSong = songId =>({
+    type: DELETE_SONG,
+    payload: songId
+})
 export const loadSongs = songs => ({
     type: LOAD_SONGS,
     payload: songs
@@ -56,6 +61,25 @@ export const thunkFetchSongById = (songId) => async dispatch => {
 
 }
 
+export const thunkDeleteSong = (songId) => async dispatch =>{
+    const res = await fetch(`/api/songs/${songId}`,{
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if(res.ok){
+        const deleteSongConfirm = await res.json()
+        dispatch(deleteSong(deleteSongConfirm))
+        return deleteSongConfirm
+    }
+    else{
+        return "thunk delete song error"
+    }
+
+}
+
 const songReducer = (state={}, action) =>{
     switch(action.type){
         case LOAD_SONGS: {
@@ -75,7 +99,11 @@ const songReducer = (state={}, action) =>{
             // console.log("🚀 ~ songReducer ~ newSongsState:", newSongsState)
             return newSongsState
         }
-
+        case DELETE_SONG: {
+            const newSongState = {...state}
+            delete newSongState[action.payload]
+            return newSongState
+        }
         default:
             return state
 
