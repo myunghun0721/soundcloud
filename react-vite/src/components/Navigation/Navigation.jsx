@@ -16,7 +16,7 @@ function Navigation() {
       </div>
 
       <div className='div-navigation-a-user'>
-        {/* {sessionUser && <NavLink to="/spots/new" className={`a-createSpot`}>Create a New Spot</NavLink>} */}
+        {sessionUser && <NavLink to="/songs/new" className={`upload-a-song`}>UPLOAD</NavLink>}
         <ProfileButton user={sessionUser} />
       </div>
 
