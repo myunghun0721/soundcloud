@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         element: <LoginFormPage />,
       },
       {
-        path: "/user/:userId",
+        path: "/user/current",
         element: <UserProfile />,
         children: [
           {

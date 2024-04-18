@@ -28,7 +28,7 @@ const PopupForm = ({ user, onClose }) => {
 const UserProfile = () => {
     const { userId } = useParams();
     const dispatch = useDispatch();
-    const user = useSelector(state => state.users[userId]);
+    const user = useSelector(state => state.users);
     const location = useLocation();
     const [showTracks, setShowTracks] = useState(true);
     const [showDetails, setShowDetails] = useState(false);
