@@ -5,10 +5,6 @@ import HomePage from '../components/HomePage';
 import Layout from './Layout';
 import SongDetails from '../components/SongDetails';
 import SongFormPage from '../components/SongFormPage';
-import UserProfile from '../components/UserProfile/profile';
-import LoginFormPage from '../components/LoginFormPage/LoginFormPage';
-import UserTracks from '../components/UserProfile/UserTracks/userTracks';
-import LikedSongs from '../components/UserProfile/UserLikes/userLikes';
 
 export const router = createBrowserRouter([
   {
@@ -26,24 +22,10 @@ export const router = createBrowserRouter([
         path: "/songs/new",
         element: <SongFormPage/>,
       },
-      {
-        path: "/login",
-        element: <LoginFormPage />,
-      },
-      {
-        path: "/user/current",
-        element: <UserProfile />,
-        children: [
-          {
-            path: "tracks",
-            element: <UserTracks />
-          },
-        ]
-      },
-      {
-        path: 'user/current/likes',
-        element: <LikedSongs />
-      }
+      // {
+      //   path: "/login",
+      //   element: <LoginFormPage />,
+      // },
       // {
       //   path: "/signup",
       //   element: <SignupFormPage />,

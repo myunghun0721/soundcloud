@@ -44,7 +44,11 @@ function ProfileButton() {
     closeMenu();
   };
 
+<<<<<<< HEAD
 
+=======
+  const navigate = useNavigate()
+>>>>>>> parent of 7bd8685 (fix conflict)
   return (
     <>
       <button className="nav-user-button" onClick={toggleMenu}>
