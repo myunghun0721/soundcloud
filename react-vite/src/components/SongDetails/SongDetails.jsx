@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkFetchSongById } from "../../redux/songs"
-import { thunkFetchComments } from "../../redux/comments"
+import { clearComment, thunkFetchComments } from "../../redux/comments"
 import { thunkFetchLikes } from "../../redux/likes"
 import { useParams } from 'react-router-dom'
 import SongDetailsHeader from "../SongDetailsHeader/SongDetailsHeader"
@@ -45,6 +45,10 @@ const SongDetails = () => {
         // Retrieve comments of the Song
         dispatch(thunkFetchComments(parseInt(songId)))
         dispatch(thunkFetchLikes(parseInt(songId)))
+        // add this cleanup function to when navigate away or the song id changed
+        return () => {
+            dispatch(clearComment())
+        }
 
     },[dispatch, songId])
 
