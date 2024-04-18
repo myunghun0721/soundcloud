@@ -44,7 +44,6 @@ function ProfileButton() {
     closeMenu();
   };
 
-  const navigate = useNavigate()
   return (
     <>
       <button className="nav-user-button" onClick={toggleMenu}>
