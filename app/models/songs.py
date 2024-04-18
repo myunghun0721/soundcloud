@@ -2,8 +2,9 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from ..models import playlist_songs
 from .like import likes
+from flask_login import UserMixin
 
-class Song(db.Model):
+class Song(db.Model, UserMixin):
     __tablename__ = 'songs'
 
     if environment == "production":

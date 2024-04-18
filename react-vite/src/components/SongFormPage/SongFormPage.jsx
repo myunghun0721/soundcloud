@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch, } from "react-redux";
+import { useDispatch, useSelector, } from "react-redux";
 import "./SongFormPage.css"
+import { thunkUploadSongs } from "../../redux/songs";
+import { useNavigate } from "react-router-dom";
 
 
 function SongFormPage() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [title, setTitle] = useState("")
   const [artist, setArtist] = useState("")
   const [album, setAlbum] = useState("")
@@ -15,10 +18,14 @@ function SongFormPage() {
   const [imageLoading, setImageLoading] = useState(false);
   const [error, setError] = useState({})
 
+  const currentUser = useSelector(state => state.session['user'])
+
+  useEffect(()=>{
+    if(!currentUser) navigate('/')
+  }, [navigate, currentUser])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
 
     const errObj = {}
     if(!title.length) errObj.title = "title required"
@@ -45,13 +52,13 @@ function SongFormPage() {
       formData.append('song_url', song)
 
 
-      // dispatch(thunkUploadSongs(formData))
+      dispatch(thunkUploadSongs(formData))
 
       setImageLoading(false)
-      for (const value of formData.values()) {
-        console.log(value);
-      }
-      console.log("🚀 ~ handleSubmit ~ formData:", formData)
+      // for (const value of formData.values()) {
+      //   console.log(value);
+      // }
+      // console.log("🚀 ~ handleSubmit ~ formData:", formData)
       setError({})
     }
     // const formSubmit = {

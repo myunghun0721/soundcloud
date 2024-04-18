@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from '../components/HomePage';
 import Layout from './Layout';
 import SongDetails from '../components/SongDetails';
+import SongFormPage from '../components/SongFormPage';
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ export const router = createBrowserRouter([
       {
         path: "/songs/:songId",
         element: <SongDetails/> 
-      }
+      },
+      {
+        path: "/songs/new",
+        element: <SongFormPage/>,
+      },
       // {
       //   path: "/login",
       //   element: <LoginFormPage />,

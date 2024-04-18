@@ -5,10 +5,15 @@ const LOAD_SONG_BY_ID = 'songs/loadSongById'
 
 
 // Action  creators for loading data
+const UPLOAD_SONG = 'songs/uploadSong';
 
 export const loadSongs = songs => ({
     type: LOAD_SONGS,
     payload: songs
+})
+export const uploadSong = song =>({
+    type: UPLOAD_SONG,
+    payload: song
 })
 
 export const loadSongById = song => ({
@@ -19,11 +24,27 @@ export const loadSongById = song => ({
 
 // Thunk actions
 export const thunkFetchSongs = () => async dispatch => {
-    const res = await fetch('/api/songs')
+    const res = await fetch('/api/songs/')
 
     if(res.ok){
         const songs = await res.json()
         dispatch(loadSongs(songs))
+    }
+}
+export const thunkUploadSongs = (song) => async dispatch => {
+    console.log("before res")
+    const res = await fetch('/api/songs/',{
+        method: 'POST',
+        body: song
+    })
+    console.log("After res")
+    if(res.ok){
+        console.log("thunk res ok")
+        const song= await res.json()
+        // dispatch(uploadSong(song))
+    }
+    else{
+        return "song thunk error"
     }
 }
 
@@ -48,6 +69,12 @@ const songReducer = (state={}, action) =>{
         }
         case LOAD_SONG_BY_ID: {
             return {...state, [action.payload.id]: action.payload}
+        }
+
+        case UPLOAD_SONG: {
+            const newSongsState = {...state}
+            newSongsState[action.song.id] = action.song
+            return newSongsState
         }
 
         default:
