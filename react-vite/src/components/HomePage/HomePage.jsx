@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkFetchSongs } from "../../redux/songs"
 import "./HomePage.css"
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { FaCirclePlay } from "react-icons/fa6";
 
 
