@@ -77,12 +77,10 @@ const SongDetails = () => {
 
     return (
         <div>
-            <h1>{song.title}</h1>
-            <h3>{song.artist}</h3>
-            <h3>{song.genre}</h3>
-            <h3>{song.album}</h3>
+            <SongDetailsHeader song={song} releaseDate={releaseDate} />
+            
             <h3>likes: {likeCountNumber}</h3>
-             <h3>{releaseDate}</h3>
+            
             {errors.message && <h1>{errors.message}</h1>}
 
             {comments && <section className="comment-section">
