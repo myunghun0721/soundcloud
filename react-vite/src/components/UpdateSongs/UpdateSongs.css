@@ -1,0 +1,59 @@
+.update-song-form form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f2f4f8;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.update-song-form input[type="text"],
+.update-song-form input[type="date"],
+.update-song-form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.update-song-form input[type="text"]:focus,
+.update-song-form input[type="date"]:focus {
+    border-color: #ff7700;
+    outline: none;
+}
+
+.update-song-form button {
+    background-color: #ff3300;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.update-song-form button:hover {
+    background-color: #e62e00;
+}
+
+.update-song-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+.update-song-form .error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.update-song-form form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}

@@ -8,6 +8,8 @@ import SongFormPage from '../components/SongFormPage';
 import UserProfile from '../components/UserProfile/profile';
 import LoginFormPage from '../components/LoginFormPage/LoginFormPage';
 import UserTracks from '../components/UserProfile/UserTracks/userTracks';
+import LikedSongs from '../components/UserProfile/UserLikes/userLikes';
+import UpdateSong from '../components/UpdateSongs/UpdateSongs';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ export const router = createBrowserRouter([
           },
         ]
       },
+      {
+        path: 'user/current/likes',
+        element: <LikedSongs />
+      },
+      {
+        path: '/song/:songId/edit',
+        element: <UpdateSong />
+      }
       // {
       //   path: "/signup",
       //   element: <SignupFormPage />,
