@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import WaveSurfer from 'wavesurfer.js'
 
 
-const WaveForm  = ({ url, isPlaying, togglePlay }) => {
+const WaveForm  = ({ url, isPlaying}) => {
     // Element containing the waveform
     const waveformRef = useRef(null)
     const canvas = document.createElement('canvas')
@@ -66,7 +66,7 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
         return () => wavesurferRef.current.destroy();
 
 
-    }, [audioUrl, url]) // by using the useEffect when the url change it will trigger re-render
+    }, []) // by using the useEffect when the url change it will trigger re-render
     useEffect (() => {
         if(isReady) {
             isPlaying ? wavesurferRef.current.play() : wavesurferRef.current.pause()

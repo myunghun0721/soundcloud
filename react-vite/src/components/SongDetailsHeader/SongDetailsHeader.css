@@ -37,6 +37,7 @@
 
 
 .song-details-header {
+  box-sizing: border-box;
     display: flex;
     width: 1292px;
     background: #a9a08f;
@@ -69,10 +70,10 @@
 .song-title-details {
     font-weight:  bold;
     margin-top: 15px;
-    font-size: 30px;
+    font-size: 27px;
     color: #f2f2f2;
     background-color: black;
-    width:40%;
+    width:45%;
     display: flex;
     justify-content: center;
     
@@ -90,7 +91,7 @@
 }
 
 .waveform-container {
-    width:930px ;
+    width:750px ;
     display: flex;
     /* flex-direction: column; */
     justify-content: flex-start;
@@ -102,8 +103,8 @@
     padding: 0px;
 
     right: 100px;
-    top: 150px;
-    overflow-x: visible
+    top: 117px;
+  
 
 }
 #waveform {
@@ -112,10 +113,13 @@
     
     margin-left: 0; */
     width: 100%;
-    /* position: absolute; */
-    /* Center it vertically from the top */
-    /* transform: translateY(-50%); Offset by half its height to truly center it */
-    /* transform: scaleX(4.5); */
-    /* transform: scaleY(5.5); */
-    /* transform-origin: left center; */
 }
+.song-genre-detail {
+  color: white;
+  font-size: 17px;
+  margin-right: 40px;
+  margin-top: 50px;
+}
+
+
+
