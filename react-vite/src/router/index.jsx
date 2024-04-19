@@ -8,7 +8,7 @@ import SongFormPage from '../components/SongFormPage';
 import UserProfile from '../components/UserProfile/profile';
 import LoginFormPage from '../components/LoginFormPage/LoginFormPage';
 import UserTracks from '../components/UserProfile/UserTracks/userTracks';
-import LikedSongs from '../components/UserProfile/UserLikes/userLikes';
+import LikedSongs from '../components/UserProfile/UserPlaylists/userLikes';
 import UpdateSong from '../components/UpdateSongs/UpdateSongs';
 
 export const router = createBrowserRouter([
