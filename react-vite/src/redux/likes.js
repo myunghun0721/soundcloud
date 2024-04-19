@@ -22,7 +22,7 @@ export const thunkFetchLikes = (songId) => async dispatch => {
 const likeReducer = (state={}, action) => {
     switch(action.type){
         case LOAD_ALL_LIKES_BY_SONG_ID: {
-            return {... state, like_count: action.payload}
+            return {... state, likeCount: action.payload}
         }
         default:
             return state

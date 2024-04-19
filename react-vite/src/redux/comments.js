@@ -3,6 +3,9 @@
 // load comments base on song id
 const LOAD_COMMENTS_BY_SONG_ID = 'song/:songId/comments'
 
+//Clear comment
+const CLEAR_COMMENTS ='/comments/CLEAR_COMMENTS'
+
 // Action creators for loading comments:
 
 export const loadCommentsBySongId = comments => ({
@@ -10,6 +13,11 @@ export const loadCommentsBySongId = comments => ({
     payload: comments
 })
 
+// clear comments previous comments when loading into new song 
+export const clearComment = () => ({
+    type: CLEAR_COMMENTS
+
+})
 // Thunk actions:
 
 // fetch all the comments by song id
@@ -29,6 +37,8 @@ const commentReducer = (state={}, action)=>{
             return newCommentsState
 
         }
+        case CLEAR_COMMENTS:
+            return {}
         default:
             return state
     }

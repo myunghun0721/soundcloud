@@ -1,0 +1,14 @@
+.song-details-header {
+    display: flex;
+}
+.song-image-container {
+    flex: 1;
+
+}
+.song-image {
+    max-width: 100%;
+}
+.song-info-container {
+    flex: 3;
+
+}
