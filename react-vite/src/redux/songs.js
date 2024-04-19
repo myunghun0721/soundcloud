@@ -1,5 +1,6 @@
 const LOAD_SONGS = 'songs/loadSongs';
 const FETCH_SONGS_BY_ID = "FETCH_SONGS_BY_ID"
+const UPDATE_SONG = "UPDATE_SONG"
 
 export const loadSongs = songs => ({
     type: LOAD_SONGS,
@@ -8,6 +9,11 @@ export const loadSongs = songs => ({
 
 export const fetchSongsById = song => ({
     type: FETCH_SONGS_BY_ID,
+    payload: song
+})
+
+export const updateSong = song => ({
+    type: UPDATE_SONG,
     payload: song
 })
 
@@ -28,6 +34,49 @@ export const thunkFetchSongs = () => async dispatch => {
         dispatch(loadSongs(songs))
     }
 }
+
+export const thunkUpdateSong = (song) => async (dispatch) => {
+    const {
+      id,
+      title,
+      artist,
+      album,
+      release_date,
+      genre,
+      preview_img,
+      song_url,
+    } = song;
+
+    try {
+      const response = await fetch(`/api/songs/${id}`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          artist,
+          album,
+          release_date,
+          genre,
+          preview_img,
+          song_url,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update the song.');
+      }
+
+      const updatedSong = await response.json();
+      dispatch(updateSong(updatedSong));
+    } catch (error) {
+      console.error('Error updating song:', error);
+    }
+  };
+
+
+
 
 
 const songReducer = (state={}, action) =>{
