@@ -1,16 +1,16 @@
 .play-button {
     background-color: #ff4500; /* The background color */
-    border-radius: 50%; 
-    width: 70px; 
+    border-radius: 50%;
+    width: 70px;
     height: 70px;
-    border: none; 
-    cursor: pointer; 
+    border: none;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 5px;
   }
-  
+
   .play-icon {
     border-top: 24px solid transparent;
     border-bottom: 24px solid transparent;
@@ -19,13 +19,13 @@
   }
   .pause-icon {
     position: relative;
-    width: 30px; 
+    width: 30px;
     height: 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
-  
+
   .pause-bar {
     background-color: white;
     width: 8px; /* Width of each bar */
@@ -75,7 +75,7 @@
     width:40%;
     display: flex;
     justify-content: center;
-    
+
 }
 .song-title-details-2 {
     font-weight:  bold;
@@ -86,7 +86,7 @@
     width: 10%;
     display: flex;
     justify-content: center;
-    
+
 }
 
 .waveform-container {
@@ -103,13 +103,14 @@
 
     right: 100px;
     top: 150px;
-    overflow-x: visible
+    overflow-x: visible;
+    z-index: -1;
 
 }
 #waveform {
     /* width:100%;
 
-    
+
     margin-left: 0; */
     width: 100%;
     /* position: absolute; */

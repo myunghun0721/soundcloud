@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkFetchSongById } from "../../redux/songs"
 import { clearComment, thunkFetchComments } from "../../redux/comments"
@@ -8,17 +8,20 @@ import SongDetailsHeader from "../SongDetailsHeader/SongDetailsHeader"
 
 
 import "./SongDetails.css"
+import CreatePlaylistModal from "../CreatePlaylistModal"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
+import AddPlaylistModal from "../AddPlaylistModal"
 
 
 const SongDetails = () => {
     // Get songId from the url
-    const {songId} = useParams()
-    const  dispatch = useDispatch()
+    const { songId } = useParams()
+    const dispatch = useDispatch()
     //Error state
     const [errors, setErrors] = useState({})
     // Retrieve song from redux store
 
-    // if song id is invalid it will return undefined 
+    // if song id is invalid it will return undefined
     // because during the normalization process in the Redux store if not match
     // Song Id was found
     const song = useSelector(state => state.songs[songId])
@@ -34,17 +37,17 @@ const SongDetails = () => {
     // if song is invalid i
     const likeCountNumber = typeof likeCount === "number" ? likeCount : 0
 
-   // fetch the song by it id from backend server
-    useEffect (() => {
+    // fetch the song by it id from backend server
+    useEffect(() => {
         //Retrieve song base on song id
         dispatch(thunkFetchSongById(parseInt(songId)))
-        // Retrieve backend message if there is no id match for song
-        .then(data => {
-            if(data.message){
-                console.log("from component",data)
-                setErrors(data)
-            }
-        })
+            // Retrieve backend message if there is no id match for song
+            .then(data => {
+                if (data.message) {
+                    console.log("from component", data)
+                    setErrors(data)
+                }
+            })
         // Retrieve comments of the Song
         dispatch(thunkFetchComments(parseInt(songId)))
         dispatch(thunkFetchLikes(parseInt(songId)))
@@ -53,52 +56,58 @@ const SongDetails = () => {
             dispatch(clearComment())
         }
 
-    },[dispatch, songId])
+    }, [dispatch, songId])
 
-
-    
-
-   
-    
     // console.log(likeCount)
     // console.log(song)
 
 
     if (!song) {
         // return <h1>No song found.</h1>
-       return <h1>{errors.message}</h1>
+        return <h1>{errors.message}</h1>
     }
 
     //  Format the relase date
 
-    let releaseDate 
+    let releaseDate
     releaseDate = song.release_date
     releaseDate = new Date(releaseDate).toLocaleDateString("en-US", {
-        year:"numeric",
-        month:"long",
-        day:"numeric"
+        year: "numeric",
+        month: "long",
+        day: "numeric"
     })
 
     return (
         <div className="song-details-container">
-            <SongDetailsHeader song={song} releaseDate={releaseDate} user ={user}/>
-            
+            <SongDetailsHeader song={song} releaseDate={releaseDate} user={user} />
+
             <h3>likes: {likeCountNumber}</h3>
-            
+
             {errors.message && <h1>{errors.message}</h1>}
 
             {comments && <section className="comment-section">
-            <h3>Comments</h3>
-                    {comments.length > 0 ? (
+                <h3>Comments</h3>
+                {comments.length > 0 ? (
                     comments.map(comment => (
                         <p key={comment.id}>{comment.body}</p>
                     ))
                     // if there is no comment will display No comment yet
-                    ) : (
+                ) : (
                     <p>No comments yet.</p>
-                    )}
-                
+                )}
+
             </section>}
+
+            {/* display add to playlist when user logged in */}
+            { user && <div>
+                <button className="add-playlist">
+                    <OpenModalMenuItem
+                        itemText="Add to playlist"
+                        //     onItemClick={closeMenu}
+                        modalComponent={<AddPlaylistModal songId={song.id} />}
+                    />
+                </button>
+            </div>}
         </div>
     )
 }

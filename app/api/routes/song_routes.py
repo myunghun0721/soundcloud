@@ -49,7 +49,7 @@ def post_song():
         new_song = Song(**params)
         db.session.add(new_song)
         db.session.commit()
-        print(new_song.to_dict())
+        # print(new_song.to_dict())
         return new_song.to_dict()
 
     return {"message": "validation failed"}, 401

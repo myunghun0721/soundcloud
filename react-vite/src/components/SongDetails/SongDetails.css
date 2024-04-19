@@ -5,3 +5,11 @@
     /* max-width: 1000000px; */
     /* width: 1292px; */
 }
+.add-playlist{
+    list-style-type: none;
+    width: 150px;
+    height: auto;
+}
+.add-playlist li{
+    padding: 15px;
+}

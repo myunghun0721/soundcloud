@@ -16,8 +16,7 @@ const rootReducer = combineReducers({
   songs: songReducer,
   comments: commentReducer,
   likes: likeReducer,
-  users: userReducer
-
+  users: userReducer,
 });
 
 let enhancer;

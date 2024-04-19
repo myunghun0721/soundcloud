@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import './DeleteModal.css'
-import { thunkDeleteSong } from '../../redux/songs';
+import './DeletePlaylistModal.css'
+import { thunkDeletePlaylists } from '../../redux/user';
 
 
-function DeleteSongModal({ songId }) {
+function DeletePlaylistModal({ playlistId }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch()
 
@@ -13,20 +13,20 @@ function DeleteSongModal({ songId }) {
         closeModal()
     }
     async function yesButton() {
-
-        await dispatch(thunkDeleteSong(songId))
+        // console.log(playlistId)
+        await dispatch(thunkDeletePlaylists(playlistId))
         closeModal()
     }
     return (
         <div id="deleteModal" className='div-modal-login'>
-            <h1>Confirm Delete Song</h1>
+            <h1>Confirm Delete Playlist</h1>
 
             <div className="button-confirm">
                 <button id="yes" onClick={yesButton}>
-                    Yes (DELETE Song)
+                    Yes (DELETE Playlist)
                 </button>
                 <button id="no" onClick={noButton}>
-                    No (Keep Song)
+                    No (Keep Playlist)
                 </button>
             </div>
         </div>
@@ -34,4 +34,4 @@ function DeleteSongModal({ songId }) {
 }
 
 
-export default DeleteSongModal;
+export default DeletePlaylistModal;
