@@ -1,14 +1,8 @@
 export const LOAD_USER = 'user/loadUser';
 export const FETCH_SONGS = 'FETCH_SONGS'
 export const FETCH_PLAYLISTS = '/FETCH_PLAYLISTS'
-<<<<<<< HEAD
-export const CREATE_PLAYLISTS = 'playlist/createPlaylists'
-export const DELETE_PLAYLISTS = 'playlist/deletePlaylists'
-export const ADD_SONG_TO_PLAYLISTS = 'playlist/addSongToPlaylists'
-=======
 export const FETCH_LIKES = '/FETCH_LIKES'
 
->>>>>>> 90ef7c5be226dac779da4404ca6f7dc3f4b3c013
 export const loadUser = user => ({
     type: LOAD_USER,
     payload: user
@@ -153,30 +147,11 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 playlists: action.payload
             }
-<<<<<<< HEAD
-        case CREATE_PLAYLISTS: {
-            const newPlaylistsState = { ...state }
-            newPlaylistsState[action.payload.id] = action.payload
-            return newPlaylistsState
-        }
-        case DELETE_PLAYLISTS: {
-            const newSongState = { ...state }
-            delete newSongState[action.payload]
-            return newSongState
-        }
-        case ADD_SONG_TO_PLAYLISTS: {
-            return {
-                ...state,
-                playlists: action.payload
-            }
-        }
-=======
         case FETCH_LIKES:
             return {
                 ...state,
                 likes: action.payload
             }
->>>>>>> 90ef7c5be226dac779da4404ca6f7dc3f4b3c013
         default:
             return state;
     }

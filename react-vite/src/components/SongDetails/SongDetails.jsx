@@ -5,6 +5,8 @@ import { clearComment, thunkFetchComments } from "../../redux/comments"
 import { thunkFetchLikes } from "../../redux/likes"
 import { useParams } from 'react-router-dom'
 import SongDetailsHeader from "../SongDetailsHeader/SongDetailsHeader"
+import { thunkPostComment } from "../../redux/comments"
+import { thunkDeleteComment } from "../../redux/comments"
 
 
 import "./SongDetails.css"
@@ -36,18 +38,35 @@ const SongDetails = () => {
     const { likeCount } = likesObj
     // if song is invalid i
     const likeCountNumber = typeof likeCount === "number" ? likeCount : 0
+// comment field state
+const [newComment, setNewComment] = useState('')
+
+//handle comment input value change
+const handleCommentChange = (e)=> {
+    setNewComment(e.target.value)
+}
+const sumbmitComment = ()=> {
+    
+    dispatch(thunkPostComment(songId, newComment))
+
+    setNewComment('')
+
+}
+const deleteComment = (commentId) => {
+    dispatch(thunkDeleteComment(songId,commentId))
+}
 
     // fetch the song by it id from backend server
     useEffect(() => {
         //Retrieve song base on song id
         dispatch(thunkFetchSongById(parseInt(songId)))
-            // Retrieve backend message if there is no id match for song
-            .then(data => {
-                if (data.message) {
-                    console.log("from component", data)
-                    setErrors(data)
-                }
-            })
+        // Retrieve backend message if there is no id match for song
+        .then(data => {
+            if(data.message){
+                // console.log("from component",data)
+                setErrors(data)
+            }
+        })
         // Retrieve comments of the Song
         dispatch(thunkFetchComments(parseInt(songId)))
         dispatch(thunkFetchLikes(parseInt(songId)))
@@ -76,20 +95,34 @@ const SongDetails = () => {
         month: "long",
         day: "numeric"
     })
+let commentCount  = comments.length
 
     return (
         <div className="song-details-container">
-            <SongDetailsHeader song={song} releaseDate={releaseDate} user={user} />
-
+            <SongDetailsHeader song={song} releaseDate={releaseDate} user ={user}/>
+            <section className="comment-input-container">
+                <div className="avatar-holder">
+                    <img src="https://res.cloudinary.com/dzuhij5io/image/upload/v1713557207/Screenshot_2024-04-19_at_13.06.27_j4ft5n.png" alt="nothing" className="avatar" />
+                </div>
+                <input type="text" value={newComment} onChange={handleCommentChange} className="comment-input" placeholder="Write your comment"/>
+                <button className="send-button" onClick={sumbmitComment}>POST</button>
+            </section>
+            
             <h3>likes: {likeCountNumber}</h3>
 
             {errors.message && <h1>{errors.message}</h1>}
+            <hr />
 
             {comments && <section className="comment-section">
-                <h3>Comments</h3>
-                {comments.length > 0 ? (
+            <h3>{commentCount} {`comment${commentCount > 1 ? 's': '' }`}:</h3>
+                    {comments.length > 0 ? (
                     comments.map(comment => (
-                        <p key={comment.id}>{comment.body}</p>
+                        <div key={comment.id}>
+                        <p  className="comment-text">{comment.body}</p>
+                        {user && user.id == comment.user_id && (
+                            <button onClick={() => deleteComment(comment.id)} className="delete-button">Delete</button>
+                        )}
+                        </div>
                     ))
                     // if there is no comment will display No comment yet
                 ) : (
