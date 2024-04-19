@@ -23,6 +23,7 @@ export const thunkFetchSongsById = (songId) => async dispatch => {
     if (res.ok){
         const song = await res.json()
         dispatch(fetchSongsById(song))
+        return song
     }
 }
 
@@ -70,6 +71,7 @@ export const thunkUpdateSong = (song) => async (dispatch) => {
 
       const updatedSong = await response.json();
       dispatch(updateSong(updatedSong));
+      return updatedSong;
     } catch (error) {
       console.error('Error updating song:', error);
     }
@@ -91,8 +93,9 @@ const songReducer = (state={}, action) =>{
         case FETCH_SONGS_BY_ID:
         return {
             ...state,
-            [action.payload.songId]: action.payload
+            [action.payload.id]: action.payload
         }
+
         default:
             return state
     }
