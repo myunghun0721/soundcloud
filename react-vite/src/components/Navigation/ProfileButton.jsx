@@ -54,7 +54,7 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-              <NavLink to="/user/current"><li><CgProfile /> Profile</li></NavLink>
+              <NavLink to='/user/current'><li><CgProfile /> Profile</li></NavLink>
               <NavLink to='/'><li><LuMusic2 /> Songs</li></NavLink>
               <NavLink to='/'><li><FaHeart /> Likes</li></NavLink>
               <NavLink to='/'><li><PiPlaylistFill /> Playlists</li></NavLink>
