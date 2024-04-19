@@ -4,6 +4,7 @@ import { thunkFetchSongs } from "../../../redux/user";
 import './userTracks.css'
 import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
 import DeleteSongModal from "../../DeleteModal";
+import { Link } from 'react-router-dom'
 
 const UserTracks = () => {
     const dispatch = useDispatch();
@@ -26,6 +27,9 @@ const UserTracks = () => {
                                 <div className="song-artist">by {song.artist}</div>
                             </div>
                             <div className="div-button-holder">
+                                <button className ="updateButton">
+                                    <Link to={`/song/${song.id}/edit`} className="updateButton">Update</Link>
+                                </button>
                                 {/* <button onClick={(e) => updateSong(e, song.id)}><p>Update</p></button> */}
 
                                 <button className="deleteButton">
