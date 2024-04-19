@@ -55,9 +55,9 @@ function ProfileButton() {
           {user ? (
             <>
               <NavLink to='/user/current'><li><CgProfile /> Profile</li></NavLink>
-              <NavLink to='/'><li><LuMusic2 /> Songs</li></NavLink>
-              <NavLink to='/'><li><FaHeart /> Likes</li></NavLink>
-              <NavLink to='/'><li><PiPlaylistFill /> Playlists</li></NavLink>
+              {/* <NavLink to='/'><li><LuMusic2 /> Songs</li></NavLink> */}
+              <NavLink to='/likes/current'><li><FaHeart /> Likes</li></NavLink>
+              {/* <NavLink to='/'><li><PiPlaylistFill /> Playlists</li></NavLink> */}
               <hr></hr>
               <li>
                 <button onClick={logout}>Log Out</button>

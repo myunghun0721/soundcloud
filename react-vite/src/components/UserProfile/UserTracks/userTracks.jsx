@@ -20,7 +20,8 @@ const UserTracks = () => {
                 <div className="songs-grid">
                     {songs.map(song => (
                         <div key={song.id} className="song-item">
-                            <img src="https://placehold.co/400" alt={`Placeholder for ${song.title}`} />
+                            {/* <img src="https://placehold.co/400" alt={`Placeholder for ${song.title}`} /> */}
+                            <img src={song.preview_img ? song.preview_img : "../../public/soundcloud-icon.png"} alt={`Placeholder for ${song.title}`} />
                             <div className="song-details">
                                 <div className="song-title">{song.title}</div>
                                 <div className="song-artist">by {song.artist}</div>
