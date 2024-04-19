@@ -1,9 +1,14 @@
 export const LOAD_USER = 'user/loadUser';
 export const FETCH_SONGS = 'FETCH_SONGS'
 export const FETCH_PLAYLISTS = '/FETCH_PLAYLISTS'
+<<<<<<< HEAD
 export const CREATE_PLAYLISTS = 'playlist/createPlaylists'
 export const DELETE_PLAYLISTS = 'playlist/deletePlaylists'
 export const ADD_SONG_TO_PLAYLISTS = 'playlist/addSongToPlaylists'
+=======
+export const FETCH_LIKES = '/FETCH_LIKES'
+
+>>>>>>> 90ef7c5be226dac779da4404ca6f7dc3f4b3c013
 export const loadUser = user => ({
     type: LOAD_USER,
     payload: user
@@ -31,6 +36,20 @@ export const addSongToPlaylist = id => ({
     type: ADD_SONG_TO_PLAYLISTS,
     playload: id
 })
+
+export const fetchLikes = likes => ({
+    type: FETCH_LIKES,
+    payload: likes
+})
+
+export const thunkFetchLikes= () => async dispatch => {
+    const response = await fetch('/api/song/likes/user/current');
+    if (response.ok) {
+        const likes = await response.json()
+        console.log("response", response)
+        dispatch(fetchLikes(likes))
+    }
+}
 
 //thunk for fetch user
 export const thunkFetchUser = () => async dispatch => {
@@ -113,7 +132,8 @@ export const thunkAddSongToPlaylist = (playlistId, songId) => async dispatch => 
 const initialState = {
     users: null,
     songs: [],
-    playlists: []
+    playlists: [],
+    likes: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -133,6 +153,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 playlists: action.payload
             }
+<<<<<<< HEAD
         case CREATE_PLAYLISTS: {
             const newPlaylistsState = { ...state }
             newPlaylistsState[action.payload.id] = action.payload
@@ -149,6 +170,13 @@ const userReducer = (state = initialState, action) => {
                 playlists: action.payload
             }
         }
+=======
+        case FETCH_LIKES:
+            return {
+                ...state,
+                likes: action.payload
+            }
+>>>>>>> 90ef7c5be226dac779da4404ca6f7dc3f4b3c013
         default:
             return state;
     }
