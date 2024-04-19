@@ -121,7 +121,7 @@ def edit_song(songId):
         return {"message": "song not found"}
 
     if current_user != song.user_id:
-        return {"message": "your not the owner of this song", "current_user": current_user.id, "song_owner": song.user_id}
+        return {"message": "your nott he owner of this song", "current_user": current_user.id, "song_owner": song.user_id}
 
 
     form = AddSongForm()

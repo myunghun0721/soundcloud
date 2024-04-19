@@ -4,7 +4,6 @@ const LOAD_SONGS = 'songs/loadSongs';
 const FETCH_SONGS_BY_ID = "FETCH_SONGS_BY_ID"
 const LOAD_SONG_BY_ID = 'songs/loadSongById'
 
-
 // Action  creators for loading data
 const UPLOAD_SONG = 'songs/uploadSong';
 
@@ -39,7 +38,7 @@ export const loadSongById = song => ({
 
 // Thunk actions
 export const thunkFetchSongs = () => async dispatch => {
-    const res = await fetch('/api/songs/')
+    const res = await fetch('/api/songs')
 
     if(res.ok){
         const songs = await res.json()
@@ -88,7 +87,6 @@ const songReducer = (state={}, action) =>{
         case LOAD_SONG_BY_ID: {
             return {...state, [action.payload.id]: action.payload}
         }
-
         case UPLOAD_SONG: {
             const newSongsState = {...state}
             newSongsState[action.payload.id] = action.payload
@@ -98,6 +96,8 @@ const songReducer = (state={}, action) =>{
 
         default:
             return state
+
+
     }
 }
 export default songReducer;
