@@ -5,6 +5,8 @@ import HomePage from '../components/HomePage';
 import Layout from './Layout';
 import SongDetails from '../components/SongDetails';
 import SongFormPage from '../components/SongFormPage';
+import UserProfile from '../components/UserProfile/profile';
+import UserTracks from '../components/UserProfile/UserTracks/userTracks';
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +23,16 @@ export const router = createBrowserRouter([
       {
         path: "/songs/new",
         element: <SongFormPage/>,
+      },
+      {
+        path: "/user/current",
+        element: <UserProfile />,
+        children: [
+          {
+            path: "tracks",
+            element: <UserTracks />
+          },
+        ]
       },
       // {
       //   path: "/login",
