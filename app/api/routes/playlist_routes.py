@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, request
-from app.models import Song, db, Playlist, User
+from app.models import Song, db, Playlist, User, playlist_songs
 from app.forms import PlaylistForm
 from flask_login import current_user, login_required
 from datetime import datetime
 from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_from_s3
+
 
 playlist_routes = Blueprint('playlists', __name__)
 
@@ -70,3 +71,12 @@ def post_playlist():
         return new_playlist.to_dict()
 
     return {"message": "validation failed"}, 401
+
+@playlist_routes.route('/<int:playlistId>/song/<int:songId>', methods=['POST'])
+@login_required
+def add_song_playlist(playlistId, songId):
+    print("==========================", playlistId, songId)
+    song = playlist_songs.insert().values(playlist_id=playlistId, song_id=songId)
+    db.session.execute(song)
+    db.session.commit()
+    return {"message": "added song to the playlist"}

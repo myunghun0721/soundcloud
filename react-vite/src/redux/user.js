@@ -3,7 +3,7 @@ export const FETCH_SONGS = 'FETCH_SONGS'
 export const FETCH_PLAYLISTS = '/FETCH_PLAYLISTS'
 export const CREATE_PLAYLISTS = 'playlist/createPlaylists'
 export const DELETE_PLAYLISTS = 'playlist/deletePlaylists'
-
+export const ADD_SONG_TO_PLAYLISTS = 'playlist/addSongToPlaylists'
 export const loadUser = user => ({
     type: LOAD_USER,
     payload: user
@@ -25,6 +25,11 @@ export const createPlaylists = playlists => ({
 export const deletePlaylists = playlists => ({
     type: DELETE_PLAYLISTS,
     payload: playlists
+})
+
+export const addSongToPlaylist = id => ({
+    type: ADD_SONG_TO_PLAYLISTS,
+    playload: id
 })
 
 //thunk for fetch user
@@ -87,6 +92,24 @@ export const thunkDeletePlaylists = (playlistId) => async dispatch => {
     }
 
 }
+export const thunkAddSongToPlaylist = (playlistId, songId) => async dispatch => {
+    const res = await fetch(`/api/playlists/${playlistId}/song/${songId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    if (res.ok) {
+        const addSong = await res.json()
+        dispatch(addSongToPlaylist(addSong))
+        return addSong
+    }
+    else {
+        return "thunk add song to playlist error"
+    }
+
+}
 const initialState = {
     users: null,
     songs: [],
@@ -119,6 +142,12 @@ const userReducer = (state = initialState, action) => {
             const newSongState = { ...state }
             delete newSongState[action.payload]
             return newSongState
+        }
+        case ADD_SONG_TO_PLAYLISTS: {
+            return {
+                ...state,
+                playlists: action.payload
+            }
         }
         default:
             return state;
