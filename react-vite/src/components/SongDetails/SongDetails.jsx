@@ -25,6 +25,9 @@ const SongDetails = () => {
     //Retrieve comments from redux store
     const commentsObj = useSelector(state => state.comments)
     const comments = Object.values(commentsObj)
+    // Retrieving the user from redux store
+    const user = useSelector(state => state.session.user)
+    console.log("this is the user", user)
     // Retrieve likes from redux store
     const likesObj = useSelector(state => state.likes)
     const { likeCount } = likesObj
@@ -53,6 +56,7 @@ const SongDetails = () => {
     },[dispatch, songId])
 
 
+    
 
    
     
@@ -76,8 +80,8 @@ const SongDetails = () => {
     })
 
     return (
-        <div>
-            <SongDetailsHeader song={song} releaseDate={releaseDate} />
+        <div className="song-details-container">
+            <SongDetailsHeader song={song} releaseDate={releaseDate} user ={user}/>
             
             <h3>likes: {likeCountNumber}</h3>
             

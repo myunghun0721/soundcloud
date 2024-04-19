@@ -1,5 +1,6 @@
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect,Response
+import requests
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -102,6 +103,30 @@ def react_root(path):
         return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
 
+#  route for fetching audio from backend to avoid cors policy
+@app.route('/fetch-audio')
+def fetch_audio():
+    # The url pass from frontend
+    url = request.args.get('url')
+    if not url:
+        return "Missing URL", 400
+    # Fetch the audio file from aws using request library
+    response = requests.get(url, stream=True)
+    if response.status_code != 200:
+        return "Failed to fetch audio", 404
+    
+    #  return the audio file back to the front end
+
+    def generate():
+        for chunk in response.iter_content(chunk_size=4096):
+            yield chunk
+
+    return Response(generate(), headers={
+        "Content-Type": response.headers['Content-Type'],
+        "Content-Disposition": response.headers.get('Content-Disposition', 'inline')
+
+
+    })
 
 @app.errorhandler(404)
 def not_found(e):
