@@ -125,7 +125,7 @@ def edit_song(songId):
     if not song:
         return {"message": "song not found"}
 
-    if current_user != song.user_id:
+    if current_user.id != song.user_id:
         return {"message": "your not the owner of this song", "current_user": current_user.id, "song_owner": song.user_id}
 
 
@@ -146,7 +146,7 @@ def edit_song(songId):
 
         db.session.commit()
         return song.to_dict()
-    return {"message": "validation failed"}
+    return {form.errors}
 
 @song_routes.route('/<int:songId>')
 def get_song_details(songId):
