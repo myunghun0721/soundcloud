@@ -10,7 +10,7 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 function CreatePlaylistModal({ songId }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
-    const playlists = useSelector(state => state.users.playlists);
+    // const playlists = useSelector(state => state.users.playlists);
     const [title, setTitle] = useState("")
     const [previewImg, setPreviewImg] = useState()
     const [error, setError] = useState({})
