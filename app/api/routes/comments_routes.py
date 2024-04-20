@@ -20,7 +20,12 @@ def post_comment(songId):
     # if current_user is not None:
     current_user_id = current_user.id
     form = AddCommentForm()
-    current_body = request.form.get('body')
+    form['csrf_token'].data =request.cookies['csrf_token']
+
+    current_body = form.data['body']
+    print(current_body)
+    # comment = current_body.get('body')
+    # print(comment)
 
     if form.validate_on_submit():
         comment = Comment(song_id=songId, user_id=current_user_id, body=current_body)\
@@ -29,7 +34,8 @@ def post_comment(songId):
         db.session.commit()
         return jsonify(comment.to_dict())
     else:
-        return jsonify("validation failed"),404
+        print(form.errors)
+        return jsonify("validation failed"),401
 
 @comment_routes.route('/<int:songId>/comments/<int:commentId>', methods=['PUT'])
 def update_comment(songId, commentId):
