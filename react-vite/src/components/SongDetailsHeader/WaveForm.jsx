@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import WaveSurfer from 'wavesurfer.js'
 
 
-const WaveForm  = ({ url, isPlaying, togglePlay }) => {
+const WaveForm  = ({ url, isPlaying }) => {
     // Element containing the waveform
     const waveformRef = useRef(null)
     const canvas = document.createElement('canvas')
@@ -17,7 +17,7 @@ const WaveForm  = ({ url, isPlaying, togglePlay }) => {
 
     // console.log(url)
     // fetch the audio by using backend server at middle man to avoid cors policy
-    const audioUrl = `http://localhost:8000/fetch-audio?url=${encodeURIComponent(url)}` 
+    const audioUrl = `http://localhost:8000/fetch-audio?url=${encodeURIComponent(url)}`
     // console.log(audioUrl)
     // Define the waveform gradient
 const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 1.35)
@@ -41,7 +41,7 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
         // Create a WaveSurfer instance
 
         wavesurferRef.current = WaveSurfer.create({
-            container: waveformRef.current, // 
+            container: waveformRef.current, //
             minPxPerSec:50,
             waveColor: gradient,
             progressColor: progressGradient,
@@ -62,11 +62,11 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
         })
 
         // clean up function
-        // so the audio wont stack 
+        // so the audio wont stack
         return () => wavesurferRef.current.destroy();
 
 
-    }, [audioUrl, url]) // by using the useEffect when the url change it will trigger re-render
+    }, []) // by using the useEffect when the url change it will trigger re-render
     useEffect (() => {
         if(isReady) {
             isPlaying ? wavesurferRef.current.play() : wavesurferRef.current.pause()
@@ -74,7 +74,7 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
 
     },[isPlaying,isReady])
 
-    
+
     return (
         <div className="waveform-container">
             <div id="waveform" ref={waveformRef}></div>
@@ -83,7 +83,7 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
             </button> */}
         </div>
     )
-    
+
 
 
 }

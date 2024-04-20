@@ -52,3 +52,26 @@ def remove_file_from_s3(image_url):
     except Exception as e:
         return { "errors": str(e) }
     return True
+
+#  This function purpose is to allow waveform library to fetch the audip url from aws 
+
+# def set_cors(bucket_name, domain):
+#     cors_configuration = {
+#         "CORSRules": [{
+#             "AllowedHeaders": ["*"],
+#             "AllowedMethods": ["GET"],
+#             "AllowedOrigins": [domain],
+#             "MaxAgeSeconds": 3000
+
+
+#         }]
+#     }
+
+#     # apply the cors
+    
+#     s3.put_bucket_cors(Bucket=bucket_name, CORSConfiguration=cors_configuration)
+
+
+# env_domain = "http://localhost:8000" if os.getenv("ENV") == "development" else "https://soundcloud-project-m0ku.onrender.com"
+
+# set_cors(BUCKET_NAME, env_domain)

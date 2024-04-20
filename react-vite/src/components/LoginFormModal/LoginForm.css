@@ -1,25 +1,26 @@
 .login-modal{
-    width: 400px;
-    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid black;
 }
 .login-modal h1{
     margin: 50px;
 }
 .login-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 .login-form input{
   height: 35px;
   margin: 5px
 }
 .login-form button{
+  width: 150px;
+  height: auto;
   height: 35px;
   cursor: pointer;
 }

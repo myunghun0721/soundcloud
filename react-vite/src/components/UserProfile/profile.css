@@ -30,9 +30,10 @@
     align-items: center;
     margin-top: 20px;
     max-width: 1135px;
-    margin-left: 393px;
     border-bottom: 2px solid grey;
     padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .profile-link {
@@ -49,10 +50,14 @@
     border-radius: 2px;
     cursor: pointer;
     font-weight: 3px;
+    height: auto;
 }
-
+.profile-link{
+    padding: 10px;
+}
 .profile-link:hover {
     color: purple;
+    text-decoration: underline;
 }
 
 .popup-container {
@@ -89,4 +94,7 @@
 
 .popup-content button:hover {
     background-color: #0056b3;
+}
+.profile-body{
+    display: flex;
 }

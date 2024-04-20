@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkFetchLikes } from "../../../redux/user";
+import { thunkFetchLikes } from "../../../redux/user"
 import { thunkFetchSongs } from "../../../redux/songs";
 import './userLikes.css';
+// import { thunkFetchLikes } from "../../../redux/likes";
+
 
 const LikedSongs = () => {
     const dispatch = useDispatch();
