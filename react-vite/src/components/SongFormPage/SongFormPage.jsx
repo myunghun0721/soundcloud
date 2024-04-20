@@ -122,7 +122,7 @@ function SongFormPage() {
           </div>
         </div>
         <div className="submit-div">
-          <button type="submit" disabled={Object.values(error).length > 0}>Create Spot</button>
+          <button type="submit" disabled={Object.values(error).length > 0}>Upload Song</button>
           {(imageLoading) && <p>Loading...</p>}
         </div>
       </form>

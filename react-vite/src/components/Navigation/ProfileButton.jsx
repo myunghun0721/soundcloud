@@ -5,11 +5,11 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { LuMusic2 } from "react-icons/lu";
+// import { LuMusic2 } from "react-icons/lu";`
 import { FaHeart } from "react-icons/fa";
-import { PiPlaylistFill } from "react-icons/pi";
+// import { PiPlaylistFill } from "react-icons/pi";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -43,6 +43,7 @@ function ProfileButton() {
     dispatch(thunkLogout());
     closeMenu();
   };
+  // const navigate = useNavigate()
 
   return (
     <>
@@ -53,10 +54,15 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
+<<<<<<< HEAD
               <NavLink to='/user/current'><li><CgProfile /> Profile</li></NavLink>
               {/* <NavLink to='/'><li><LuMusic2 /> Songs</li></NavLink> */}
               <NavLink to='/user/current/likes'><li><FaHeart /> Likes</li></NavLink>
               {/* <NavLink to='/'><li><PiPlaylistFill /> Playlists</li></NavLink> */}
+=======
+              <NavLink to="/user/current"><li><CgProfile /> Profile</li></NavLink>
+              <NavLink to='/user/current/likes'><li><FaHeart /> Likes</li></NavLink>
+>>>>>>> 4f3ad06ec16a0d93132c10a3f686ef4d6d0f7211
               <hr></hr>
               <li>
                 <button onClick={logout}>Log Out</button>

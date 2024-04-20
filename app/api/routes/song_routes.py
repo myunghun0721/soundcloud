@@ -49,7 +49,7 @@ def post_song():
         new_song = Song(**params)
         db.session.add(new_song)
         db.session.commit()
-        print(new_song.to_dict())
+        # print(new_song.to_dict())
         return new_song.to_dict()
 
     return {"message": "validation failed"}, 401
@@ -102,8 +102,13 @@ def delete_song(songId):
     if not song:
         return {"message": "song not found"}
 
-    if current_user != song.user_id:
+    if current_user.id != song.user_id:
         return {"message": "your nott he owner of this song", "current_user": current_user.id, "song_owner": song.user_id}
+
+
+    # remove uploaded image and song (AWS)
+    remove_file_from_s3(song.preview_img) if '/' in song.preview_img else None
+    remove_file_from_s3(song.song_url) if '/' in song.song_url else None
 
     db.session.delete(song)
     db.session.commit()
@@ -121,7 +126,7 @@ def edit_song(songId):
         return {"message": "song not found"}
 
     if current_user != song.user_id:
-        return {"message": "your nott he owner of this song", "current_user": current_user.id, "song_owner": song.user_id}
+        return {"message": "your not the owner of this song", "current_user": current_user.id, "song_owner": song.user_id}
 
 
     form = AddSongForm()

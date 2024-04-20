@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, render_template
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -17,7 +17,7 @@ def authenticate():
     return {'errors': {'message': 'Unauthorized'}}, 401
 
 
-@auth_routes.route('/login', methods=['POST'])
+@auth_routes.route('/login', methods=['GET', 'POST'])
 def login():
     """
     Logs a user in
@@ -31,7 +31,9 @@ def login():
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
         return user.to_dict()
+    # return render_template("login.html", form=form)
     return form.errors, 401
+    
 
 
 @auth_routes.route('/logout')
