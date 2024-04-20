@@ -7,12 +7,14 @@ import { useParams } from 'react-router-dom'
 import SongDetailsHeader from "../SongDetailsHeader/SongDetailsHeader"
 import { thunkPostComment } from "../../redux/comments"
 import { thunkDeleteComment } from "../../redux/comments"
+// import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 
 
 import "./SongDetails.css"
-import CreatePlaylistModal from "../CreatePlaylistModal"
+// import CreatePlaylistModal from "../CreatePlaylistModal"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 import AddPlaylistModal from "../AddPlaylistModal"
+import LoginFormModal from "../LoginFormModal"
 
 
 const SongDetails = () => {
@@ -38,24 +40,50 @@ const SongDetails = () => {
     const { likeCount } = likesObj
     // if song is invalid i
     const likeCountNumber = typeof likeCount === "number" ? likeCount : 0
-// comment field state
-const [newComment, setNewComment] = useState('')
+        // comment field state
+        const [newComment, setNewComment] = useState('')
+        // this is for state is for which order to sort for the comment
+        const [orderSort, setOrderSort] = useState('newest')
 
-//handle comment input value change
-const handleCommentChange = (e)=> {
-    setNewComment(e.target.value)
-}
-// handling comment posting
-const sumbmitComment = ()=> {
-    
-    dispatch(thunkPostComment(songId, newComment))
+        //state to show login modal when click post with
+        const [showLogin, setShowLogin] = useState(false)
 
-    setNewComment('')
+        //handle comment input value change
+        const handleCommentChange = (e)=> {
+            setNewComment(e.target.value)
+        }
+        // handling comment posting
+        const sumbmitComment = ()=> {
+            if(user) {
+                dispatch(thunkPostComment(songId, newComment))
 
-}
-const deleteComment = (commentId) => {
-    dispatch(thunkDeleteComment(songId,commentId))
-}
+                setNewComment('')
+            
+            }
+            else {
+                setShowLogin(true)
+            }
+
+        }
+        const deleteComment = (commentId) => {
+            dispatch(thunkDeleteComment(songId,commentId))
+        }
+        // Handling sort onclick
+        const handleOrderToSort = (order) => {
+            setOrderSort(order)
+        }
+
+        // 
+        const sortedComment = comments.sort((a,b) => {
+            if(orderSort === "newest"){
+                return new Date(b.created_at) - new Date(a.created_at);
+
+            }
+            else {
+                return new Date(a.created_at) - new Date(b.created_at)
+            }
+        })
+
 
     // fetch the song by it id from backend server
     useEffect(() => {
@@ -97,6 +125,7 @@ const deleteComment = (commentId) => {
         day: "numeric"
     })
 let commentCount  = comments.length
+console.log(newComment.length)
 
     return (
         <div className="song-details-container">
@@ -106,15 +135,32 @@ let commentCount  = comments.length
                     <img src="https://res.cloudinary.com/dzuhij5io/image/upload/v1713557207/Screenshot_2024-04-19_at_13.06.27_j4ft5n.png" alt="nothing" className="avatar" />
                 </div>
                 <input type="text" value={newComment} onChange={handleCommentChange} className="comment-input" placeholder="Write your comment"/>
-                <button className="send-button" onClick={sumbmitComment}>POST</button>
+                { !showLogin && user ? (<button className={newComment.length > 1 ?  "send-button" : "hide-send-button"} onClick={sumbmitComment}>POST</button>) :
+                ( <button className="send-button"><OpenModalMenuItem className={"post-button-song-detail"} itemText={"POST"} modalComponent={<LoginFormModal  />} onModalClose={() => setShowLogin(false)}/></button>)}
             </section>
             
             <h3>likes: {likeCountNumber}</h3>
 
             {errors.message && <h1>{errors.message}</h1>}
             <hr />
-
+            <div className="commnent-sorting">
+                    <label>Sorted by:
+                        <select className="select-sort" value={orderSort} onChange={(e)=> handleOrderToSort(e.target.value)}>
+                            <option value="newest">Newest</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
+                    </label>
+            </div>
             {comments && <section className="comment-section">
+                {/* <div className="commnent-sorting">
+                    <label>Sorted by:
+                        <select value={orderSort} onChange={(e)=> handleOrderToSort(e.target.value)}>
+                            <option value="newest">Newest</option>
+                            <option value="oldest">Oldest</option>
+                        </select>
+                    </label>
+                </div> */}
+                {/* This condition is for when coment count is less than 1 it remove the plural  */}
             <h3>{commentCount} {`comment${commentCount > 1 ? 's': '' }`}:</h3>
                     {comments.length > 0 ? (
                     comments.map(comment => (
