@@ -45,6 +45,7 @@ const [newComment, setNewComment] = useState('')
 const handleCommentChange = (e)=> {
     setNewComment(e.target.value)
 }
+// handling comment posting
 const sumbmitComment = ()=> {
     
     dispatch(thunkPostComment(songId, newComment))

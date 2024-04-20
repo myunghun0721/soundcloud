@@ -46,9 +46,9 @@
 }
 
 .avatar {
-    width: 46px; /* Adjust size to match your design */
-    height: 46px; /* Adjust size to match your design */
-    border-radius: 50%; /* Fully round to create a circle */
+    width: 46px; 
+    height: 46px; 
+    border-radius: 50%; 
     margin-right: 12px; 
     object-fit: cover; 
     
@@ -90,12 +90,12 @@ hr {
 .comment-text {
     margin: 10px 0;
     padding: 10px;
-    background-color: #f0f0f0; /* Light gray background for each comment */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for a 3D effect */
-    font-family: Arial, sans-serif; /* Set the font style */
-    font-size: 0.95rem; /* Adjust font size */
-    color: #333; /* Dark grey text color for better readability */
+    background-color: #f0f0f0; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    font-family: Arial, sans-serif; 
+    font-size: 0.95rem; 
+    color: #333; 
     margin: 10px 0;
     padding: 15px; 
     word-wrap: break-word
