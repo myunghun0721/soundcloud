@@ -5,17 +5,19 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 // import { LuMusic2 } from "react-icons/lu";`
 import { FaHeart } from "react-icons/fa";
 // import { PiPlaylistFill } from "react-icons/pi";
+
 
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  const navigate = useNavigate()
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -42,6 +44,8 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    navigate("/")
+    
   };
   // const navigate = useNavigate()
 
@@ -54,15 +58,8 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <>
-<<<<<<< HEAD
-              <NavLink to='/user/current'><li><CgProfile /> Profile</li></NavLink>
-              {/* <NavLink to='/'><li><LuMusic2 /> Songs</li></NavLink> */}
-              <NavLink to='/user/current/likes'><li><FaHeart /> Likes</li></NavLink>
-              {/* <NavLink to='/'><li><PiPlaylistFill /> Playlists</li></NavLink> */}
-=======
               <NavLink to="/user/current"><li><CgProfile /> Profile</li></NavLink>
               <NavLink to='/user/current/likes'><li><FaHeart /> Likes</li></NavLink>
->>>>>>> 4f3ad06ec16a0d93132c10a3f686ef4d6d0f7211
               <hr></hr>
               <li>
                 <button onClick={logout}>Log Out</button>

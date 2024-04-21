@@ -18,9 +18,6 @@ def song_index():
 @login_required
 def post_song():
 
-    print("=========from song route===============")
-    print("UserId, =======>", current_user)
-    print("UserId, =======>", current_user.id)
     form = AddSongForm()
     form['csrf_token'].data =request.cookies['csrf_token']
 

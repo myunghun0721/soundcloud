@@ -4,6 +4,7 @@ import "./SongFormPage.css"
 import { thunkUploadSongs } from "../../redux/songs";
 import { useNavigate } from "react-router-dom";
 import { FaCamera } from "react-icons/fa";
+import {ToastContainer, toast} from "react-toastify"
 
 function SongFormPage() {
   const dispatch = useDispatch()
@@ -42,7 +43,15 @@ function SongFormPage() {
     setImageLoading(false)
     setError({})
 
-    dispatch(thunkUploadSongs(formData)).then(newSong => navigate(`/songs/${newSong.id}`))
+      dispatch(thunkUploadSongs(formData)).then(newSong => {
+        toast.success("Successfully uploaded song",{
+          onClose: ()=> navigate(`/songs/${newSong.id}`)
+        })
+      
+      
+      
+      })
+      
 
 
     // const formSubmit = {
@@ -71,6 +80,7 @@ function SongFormPage() {
   }, [title, artist, album, releaseDate, genre, previewImg, song])
   return (
     <div className="song-form">
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       <form className="form-uploadsong" onSubmit={handleSubmit}>
         <div className="header-div">
           <h1>Upload your song</h1>

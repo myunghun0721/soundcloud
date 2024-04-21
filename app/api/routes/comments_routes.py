@@ -23,9 +23,7 @@ def post_comment(songId):
     form['csrf_token'].data =request.cookies['csrf_token']
 
     current_body = form.data['body']
-    print(current_body)
-    # comment = current_body.get('body')
-    # print(comment)
+    
 
     if form.validate_on_submit():
         comment = Comment(song_id=songId, user_id=current_user_id, body=current_body)\
@@ -40,21 +38,23 @@ def post_comment(songId):
 @comment_routes.route('/<int:songId>/comments/<int:commentId>', methods=['PUT'])
 def update_comment(songId, commentId):
     form = AddCommentForm()
+    form['csrf_token'].data =request.cookies['csrf_token']
     comment = Comment.query.filter_by(id=commentId, song_id=songId).first()
-    if request.method=="GET":
-        comment_data = {
-            'body': comment.body
-        }
-        form.process(data=comment_data)
+    # if request.method=="GET":
+    #     comment_data = {
+    #         'body': comment.body
+    #     }
+    #     form.process(data=comment_data)
+    body = form.data['body']
+    print(body)
 
-    elif request.method=="POST" and form.validate_on_submit():
-        body = request.form.get('body')
+    if request.method=="PUT" and form.validate_on_submit():
         comment.body = body
         db.session.add(comment)
         db.session.commit()
         return jsonify(comment.to_dict())
     else:
-        return jsonify("form not validated")
+        return jsonify("form not validated"), 401
 
 
 @comment_routes.route('/<int:songId>/comments/<int:commentId>/delete', methods=['DELETE'])

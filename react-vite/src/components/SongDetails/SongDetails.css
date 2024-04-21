@@ -56,18 +56,28 @@
 }
 
 .send-button {
-    bottom: 10px;
-    margin-bottom: 20px;
+    /* bottom: 10px; */
+    margin-bottom: 11px;
+    margin-left: 11px;
     background-color: orangered ;
     color: aliceblue;
+    border: none;
+    /* margin: 15px; */
+    width: 50px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 700;
 }
 
 .send-button:hover {
-    bottom: 10px;
-    margin-bottom: 20px;
+    /* bottom: 10px; */
+    /* margin-bottom: 20px; */
     background-color: rgb(206, 108, 72) ;
     color: aliceblue;
      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+     margin-bottom: 11px;
+     margin-left: 11px;
 }
 
 .comment-input:focus{
@@ -121,26 +131,82 @@ hr {
 
 }
 
+
 .select-sort{
     border: 0px;
     color: orangered;
+    background-color: transparent;
+    width: 100%; 
+    padding-left:50px;
+    border: none; 
+    
     
     
 }
 .select-sort:focus {
     outline: none;
      /* box-shadow: 0 2px 4px rgba(0,0,0,0.1);  */
+     
 
 }
-.commnent-sorting:hover {
+.select-sort:hover {
+    color: white;
+    width: 100%;
     background-color: orangered;
+    height: 100%;
+}
+.commnent-sorting:hover {
+    /* background-color: orangered; */
     color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 
 
 }
 
-.delete-button {
-    margin: 10px
+
+
+.confirm-delete {
+    position: absolute;
+    width: 300px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: white;
+    border-radius: 5px;
+    z-index: 100; 
+  }
+  .confirm-delete > button {
+    margin-top: 10px;
+    margin-right: 100px;
+  }
+
+.comment-text-edit {
+    box-sizing: border-box;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f0f0f0; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    font-family: Arial, sans-serif; 
+    font-size: 0.95rem; 
+    color: #333; 
+    margin: 10px 0;
+    padding: 15px; 
+    border: none;
+    width: 264px;
+    word-wrap: break-word
+
+    
+}
+.comment-text-edit:focus{
+    outline: none;
 }
 
+
+.edit-delete {
+    display: flex;
+    justify-content:space-between;
+}
+.save-cancel {
+    display: flex;
+    justify-content: space-between;
+}

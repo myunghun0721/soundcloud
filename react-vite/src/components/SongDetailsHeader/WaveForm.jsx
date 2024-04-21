@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import WaveSurfer from 'wavesurfer.js'
+// import 'dotenv/config'
 
 
 const WaveForm  = ({ url, isPlaying }) => {
@@ -17,8 +18,8 @@ const WaveForm  = ({ url, isPlaying }) => {
 
     // console.log(url)
     // fetch the audio by using backend server at middle man to avoid cors policy
-    const audioUrl = `http://localhost:8000/fetch-audio?url=${encodeURIComponent(url)}`
-    // console.log(audioUrl)
+    const audioUrl = `${import.meta.env.VITE_BACKEND_URL}/fetch-audio?url=${encodeURIComponent(url)}`
+    console.log(audioUrl)
     // Define the waveform gradient
 const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 1.35)
 gradient.addColorStop(0, '#656666') // Top color

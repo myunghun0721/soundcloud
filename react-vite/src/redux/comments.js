@@ -8,6 +8,10 @@ const CLEAR_COMMENTS ='/comments/CLEAR_COMMENTS'
 
 // Add comment
 const ADD_COMMENT = 'comments/new'
+
+// Edit comment
+
+const EDIT_COMMENT = 'comments/edit'
 // Delete comment 
 const DELETE_COMMENT = 'comments/delete'
 // Action creators for loading comments:
@@ -31,6 +35,15 @@ export const deleteComment = commentId => ({
     type: DELETE_COMMENT,
     payload: commentId
 })
+
+// edit comment action creator
+export const editComment = comment => ({
+    type: EDIT_COMMENT,
+    payload: comment
+
+
+})
+
 // Thunk actions:
 
 // fetch all the comments by song id
@@ -45,20 +58,18 @@ export  const thunkFetchComments = (songId) => async dispatch => {
 export const thunkPostComment = (songId, comment) => async dispatch => {
     const formData = new FormData()
     formData.append('body', comment)
-    console.log("thunk",comment)
     const res = await fetch(`/api/song/${songId}/comments/new`, {
         method: 'POST',
         body:formData
 
     })
-    console.log("comment", res)
     if(res.ok) {
         const comment = await res.json()
          dispatch(addCommentBySongId(comment))
         return comment
     }
     else{
-        return "song thunk error"
+        return "comment thunk error"
     }
 }
 // Delete comment
@@ -71,6 +82,27 @@ export const thunkDeleteComment = (songId,commentId) => async dispatch => {
     }
 
 }
+
+// Edit comment thunk
+
+export const thunkEditComment = (songId, commentId, comment) => async dispatch => {
+    const formData = new FormData()
+    formData.append("body", comment)
+    const res = await fetch(`/api/song/${songId}/comments/${commentId}`,{
+        method: "PUT",
+        body: formData
+    })
+    if(res.ok){
+        comment = await res.json()
+        dispatch(editComment(comment))
+        return comment
+        
+    }
+    else {
+        return "comment edit thunk error"
+
+    }
+}
 // comments reducers
 const commentReducer = (state={}, action)=>{
     switch(action.type){
@@ -82,6 +114,9 @@ const commentReducer = (state={}, action)=>{
 
         }
         case ADD_COMMENT: {
+            return {...state, [action.payload.id]: action.payload}
+        }
+        case EDIT_COMMENT: {
             return {...state, [action.payload.id]: action.payload}
         }
         case DELETE_COMMENT:
