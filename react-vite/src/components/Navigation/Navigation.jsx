@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { useSelector} from "react-redux"
 import "./Navigation.css";
-import soudCloudImage from '../../../dist/soudcloud-icon.png'
+import soudCloudImage from '../../../dist/soundcloud-icon.jpeg'
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
