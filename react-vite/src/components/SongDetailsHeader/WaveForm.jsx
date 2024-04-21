@@ -19,7 +19,7 @@ const WaveForm  = ({ url, isPlaying }) => {
     // console.log(url)
     // fetch the audio by using backend server at middle man to avoid cors policy
     const audioUrl = `${import.meta.env.VITE_BACKEND_URL}/fetch-audio?url=${encodeURIComponent(url)}`
-    console.log(audioUrl)
+    console.log(import.meta.env.VITE_BACKEND_URL)
     // Define the waveform gradient
 const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 1.35)
 gradient.addColorStop(0, '#656666') // Top color
