@@ -18,7 +18,7 @@ const UserPlaylists = () => {
                 <div className="playlists-grid">
                     {playlists.map(playlist => (
                         <div key={playlist.id} className="playlist-item">
-                            <img src='https://placehold.co/400' alt={`Playlist Cover for ${playlist.preview_img}`} />
+                            <img src={playlist.preview_img} alt={`Playlist Cover for ${playlist.preview_img}`} />
                             <div className="playlist-details">
                                 <div className="playlist-title">{playlist.title}</div>
                             </div>

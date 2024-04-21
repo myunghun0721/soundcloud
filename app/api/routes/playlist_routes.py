@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import Song, db, Playlist, User
+from app.models import Song, db, Playlist, User, Song, playlist_songs
 from app.forms import PlaylistForm
 from flask_login import current_user, login_required
 from datetime import datetime
@@ -63,3 +63,17 @@ def post_playlist():
         db.session.commit()
         return new_playlist.to_dict()
     return {"message": "validation failed"}
+
+@playlist_routes.route('/<int:playlist_id>/songs', methods=['POST'])
+@login_required
+def get_playlist_songs(playlist_id):
+    playlist = Playlist.query.get(playlist_id)
+
+    if playlist is None:
+        return jsonify("playlist not found"), 404
+
+    songs = db.session.query(Song.id).join(playlist_songs).filter(playlist_songs.c.playlist_id == playlist_id).all()
+
+    song_ids = [song.id for song in songs]
+
+    return jsonify(song_ids)
