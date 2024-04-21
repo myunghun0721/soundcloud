@@ -74,6 +74,5 @@ def get_playlist_songs(playlist_id):
 
     songs = db.session.query(Song.id).join(playlist_songs).filter(playlist_songs.c.playlist_id == playlist_id).all()
 
-    song_ids = [song.id for song in songs]
 
-    return jsonify(song_ids)
+    return jsonify(songs.to_dict())
