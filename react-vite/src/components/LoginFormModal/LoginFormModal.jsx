@@ -13,14 +13,7 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
-    );
-
+    const serverResponse = await dispatch(thunkLogin({ email, password }));
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
@@ -28,46 +21,43 @@ function LoginFormModal() {
     }
   };
 
-  function loginDemo(){
-    // console.log('login as demo')
-    const email = "hun@aa.io";
-    const password = "password";
-    closeModal()
-    dispatch(
-      thunkLogin({
-      email,
-      password,
-    })
-  )
-  }
+  const loginDemo = async () => {
+    closeModal();
+    dispatch(thunkLogin({
+      email: "demo@example.com",
+      password: "password"
+    }));
+  };
 
   return (
     <div className="login-modal">
       <h1>Log In</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
+        <div>
+          <label>Email:
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          {errors.email && <p>{errors.email}</p>}
+        </div>
+        <div>
+          <label>Password:
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          {errors.password && <p>{errors.password}</p>}
+        </div>
         <button type="submit">Log In</button>
-        <hr></hr>
-        <button onClick={loginDemo}>Login as Demo-user</button>
+        <hr />
+        <button type="button" onClick={loginDemo}>Login as Demo-user</button>
       </form>
     </div>
   );
