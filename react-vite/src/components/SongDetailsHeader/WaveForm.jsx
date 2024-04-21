@@ -15,10 +15,17 @@ const WaveForm  = ({ url, isPlaying }) => {
 
     //
     const [isReady, setIsReady] = useState(false)
+    let backendUrl;
+
+        if (import.meta.env.MODE === 'production') {
+            backendUrl = 'https://soundcloud-project-m0ku.onrender.com'; // Production URL
+        } else {
+            backendUrl = 'http://localhost:8000'; // Development URL
+        }
 
     // console.log(url)
     // fetch the audio by using backend server at middle man to avoid cors policy
-    const audioUrl = `${import.meta.env.VITE_BACKEND_URL}/fetch-audio?url=${encodeURIComponent(url)}`
+    const audioUrl = `${backendUrl}/fetch-audio?url=${encodeURIComponent(url)}`
     console.log(import.meta.env.VITE_BACKEND_URL)
     console.log(import.meta.env)
     // Define the waveform gradient
