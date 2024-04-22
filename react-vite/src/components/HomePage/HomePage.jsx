@@ -25,8 +25,7 @@ function HomePage() {
 
   return (
     <div className="all-songs">
-      <h1>SoundCloud Songs</h1>
-      <div className="song-grid">
+    <h1 className="chart-heading">SoundCloud Charts Top 50</h1>      <div className="song-grid">
         {songs.map((song) => (
           <div className="grid-item" key={song.id}>
             <div className="img-div">
