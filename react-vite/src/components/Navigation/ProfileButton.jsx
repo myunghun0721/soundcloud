@@ -7,9 +7,9 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { NavLink, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { LuMusic2 } from "react-icons/lu";
+// import { LuMusic2 } from "react-icons/lu";`
 import { FaHeart } from "react-icons/fa";
-import { PiPlaylistFill } from "react-icons/pi";
+// import { PiPlaylistFill } from "react-icons/pi";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -55,9 +55,7 @@ function ProfileButton() {
           {user ? (
             <>
               <NavLink to="/user/current"><li><CgProfile /> Profile</li></NavLink>
-              <NavLink to='/'><li><LuMusic2 /> Songs</li></NavLink>
-              <NavLink to='/'><li><FaHeart /> Likes</li></NavLink>
-              <NavLink to='/'><li><PiPlaylistFill /> Playlists</li></NavLink>
+              <NavLink to='/user/current/likes'><li><FaHeart /> Likes</li></NavLink>
               <hr></hr>
               <li>
                 <button onClick={logout}>Log Out</button>

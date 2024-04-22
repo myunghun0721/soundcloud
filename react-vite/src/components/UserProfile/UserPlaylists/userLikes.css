@@ -1,0 +1,61 @@
+.user-songs-container {
+  margin: 20px;
+  justify-content: center;
+}
+
+.user-songs-container {
+  margin: 20px auto;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.songs-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.song-item {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.album-image {
+  flex: 0 0 auto;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.song-details {
+  flex: 1;
+}
+
+.song-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.song-album {
+  font-size: 16px;
+  color: #888;
+}
+
+.song-artist {
+  font-size: 14px;
+  color: #888;
+}
+
+.loading-text {
+  margin-top: 20px;
+  text-align: center;
+  color: #888;
+}
