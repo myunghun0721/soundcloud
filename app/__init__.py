@@ -33,21 +33,9 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-<<<<<<< HEAD
-app.register_blueprint(comment_routes, url_prefix='/api/song/<int:songId>')
 app.register_blueprint(likes_routes, url_prefix='/api/song/<int:songId>')
 app.register_blueprint(comment_routes, url_prefix='/song/<int:songId>')
-app.register_blueprint(likes_routes, url_prefix='/song/<int:songId>')
 app.register_blueprint(current_likes, url_prefix='/song/likes/user')
-=======
-# app.register_blueprint(comment_routes, url_prefix='/api/song/<int:songId>')
-# app.register_blueprint(likes_routes, url_prefix='/api/song/<int:songId>')
-# Comments route
-app.register_blueprint(comment_routes, url_prefix='/api/song')
-# likes route
-app.register_blueprint(likes_routes, url_prefix='/api/song')
-app.register_blueprint(current_likes, url_prefix='/api/song/likes/user')
->>>>>>> combined-with-test
 
 # song route
 app.register_blueprint(song_routes, url_prefix='/api/songs')
@@ -122,7 +110,7 @@ def fetch_audio():
     response = requests.get(url, stream=True)
     if response.status_code != 200:
         return "Failed to fetch audio", 404
-    
+
     #  return the audio file back to the front end
 
     def generate():

@@ -7,7 +7,7 @@ from sqlalchemy.sql import select, func, text, delete
 likes_routes = Blueprint('likes', __name__)
 current_likes = Blueprint('current_likes', __name__)
 
-@likes_routes.route('/<int:songId>/likes')
+@likes_routes.route('/likes')
 def get_likes(songId):
     song = Song.query.get(songId)
 
@@ -17,7 +17,7 @@ def get_likes(songId):
     likes_count = db.session.query(likes).filter(likes.c.song_id == songId).count()
     return jsonify(likes_count)
 
-@likes_routes.route('/<int:songId>/likes/add', methods=['POST'])
+@likes_routes.route('/likes/add', methods=['POST'])
 @login_required
 def add_song_like(songId):
     current_user_id = current_user.id
@@ -33,7 +33,7 @@ def add_song_like(songId):
     likes_count = db.session.query(likes).filter(likes.c.song_id == songId).count()
     return jsonify(likes_count)
 
-@likes_routes.route('/<int:songId>/likes/delete',methods=['DELETE'])
+@likes_routes.route('/likes/delete',methods=['DELETE'])
 @login_required
 def delete_song_like(songId):
     song = Song.query.get(songId)
