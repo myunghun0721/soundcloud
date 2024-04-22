@@ -37,10 +37,6 @@ const UserPlaylists = () => {
                                     />
                                 </button>
                             </div>
-                            <img src='https://placehold.co/400' alt={`Playlist Cover for ${playlist.preview_img}`} />
-                            <div className="playlist-details">
-                                <div className="playlist-title">{playlist.title}</div>
-                            </div>
                             <img src={playlist.preview_img} alt={`Playlist Cover for ${playlist.preview_img}`} />
                             <div className="playlist-details">
                                 <div className="playlist-title">{playlist.title}</div>
