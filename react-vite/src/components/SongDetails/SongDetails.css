@@ -30,7 +30,7 @@
     border: 0.5px solid #ccc;
     border-radius: 10px;
     margin-bottom: 8px; /* Space between textarea and button */
-    /* resize: vertical; */
+  
     background-color:rgb(248, 241, 241);
     padding: 10px;
 }
@@ -259,10 +259,10 @@ hr {
     transform: translateY(-2px);
   }
   .like-count {
-    font-size: 1rem; /* Adjust to match your design */
-    font-weight: bold; /* Make it pop */
-    color: #333; /* Dark grey for contrast */
-    margin-left: 10px; /* Spacing between button and text */
+    font-size: 1rem;
+    font-weight: bold; 
+    color: #333; 
+    margin-left: 10px; 
     width: 100%;
     padding-top: 10px;
     

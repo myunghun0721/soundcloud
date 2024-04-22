@@ -1,5 +1,5 @@
 .play-button {
-    background-color: #ff4500; /* The background color */
+    background-color: #ff4500; 
     border-radius: 50%;
     width: 70px;
     height: 70px;
@@ -14,8 +14,8 @@
   .play-icon {
     border-top: 24px solid transparent;
     border-bottom: 24px solid transparent;
-    border-left: 30px solid white; /* Creates the play icon */
-    margin-left: 10px; /* Adjust the position of the icon inside the button */
+    border-left: 30px solid white; 
+    margin-left: 10px; 
   }
   .pause-icon {
     position: relative;
