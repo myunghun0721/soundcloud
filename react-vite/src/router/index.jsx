@@ -8,11 +8,8 @@ import SongFormPage from '../components/SongFormPage';
 import UserProfile from '../components/UserProfile/profile';
 import LoginFormPage from '../components/LoginFormPage/LoginFormPage';
 import UserTracks from '../components/UserProfile/UserTracks/userTracks';
-<<<<<<< HEAD
-=======
 import LikedSongs from '../components/UserProfile/UserPlaylists/userLikes';
 import UpdateSong from '../components/UpdateSongs/UpdateSongs';
->>>>>>> combined-with-test
 
 export const router = createBrowserRouter([
   {

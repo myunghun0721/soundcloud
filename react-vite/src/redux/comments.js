@@ -12,7 +12,7 @@ const ADD_COMMENT = 'comments/new'
 // Edit comment
 
 const EDIT_COMMENT = 'comments/edit'
-// Delete comment 
+// Delete comment
 const DELETE_COMMENT = 'comments/delete'
 // Action creators for loading comments:
 
@@ -26,7 +26,7 @@ export const addCommentBySongId = comment => ({
     payload :comment
 
 })
-// clear comments previous comments when loading into new song 
+// clear comments previous comments when loading into new song
 export const clearComment = () => ({
     type: CLEAR_COMMENTS
 
@@ -96,7 +96,7 @@ export const thunkEditComment = (songId, commentId, comment) => async dispatch =
         comment = await res.json()
         dispatch(editComment(comment))
         return comment
-        
+
     }
     else {
         return "comment edit thunk error"
@@ -104,31 +104,31 @@ export const thunkEditComment = (songId, commentId, comment) => async dispatch =
     }
 }
 // comments reducers
-const commentReducer = (state={}, action)=>{
-    switch(action.type){
+const commentReducer = (state = {}, action) => {
+    switch(action.type) {
         case LOAD_COMMENTS_BY_SONG_ID: {
-            const newCommentsState = {...state}
-            console.log("payload",action.payload)
-            action.payload.forEach(comment =>newCommentsState[comment.id]=comment)
-            return newCommentsState
-
+            const newCommentsState = {...state};
+            action.payload.forEach(comment => {
+                newCommentsState[comment.id] = comment;
+            });
+            return newCommentsState;
         }
         case ADD_COMMENT: {
-            return {...state, [action.payload.id]: action.payload}
+            return {...state, [action.payload.id]: action.payload};
         }
         case EDIT_COMMENT: {
-            return {...state, [action.payload.id]: action.payload}
+            return {...state, [action.payload.id]: action.payload};
         }
-        case DELETE_COMMENT:
+        case DELETE_COMMENT: {
             const newState = {...state};
             delete newState[action.payload];
             return newState;
+        }
         case CLEAR_COMMENTS:
-            return {}
+            return {};
         default:
-            return state
+            return state;
     }
-}
+};
 
-export default commentReducer
-
+export default commentReducer;
