@@ -28,7 +28,6 @@ const SongDetailsHeader = ({song,user, releaseDate}) => {
 
     }
     let releaseTime = calculateDaysOld()
-    console.log(releaseTime)
 
     return (
         <main className='song-details-header'>

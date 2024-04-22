@@ -1,3 +1,7 @@
+
+
+
+
 export const LOAD_USER = 'user/loadUser';
 export const FETCH_SONGS = 'FETCH_SONGS'
 export const FETCH_PLAYLISTS = '/FETCH_PLAYLISTS'
@@ -5,8 +9,20 @@ export const FETCH_PLAYLISTS = '/FETCH_PLAYLISTS'
 export const CREATE_PLAYLISTS = 'playlist/createPlaylists'
 export const DELETE_PLAYLISTS = 'playlist/deletePlaylists'
 export const ADD_SONG_TO_PLAYLISTS = 'playlist/addSongToPlaylists'
+const DELETE_SONG = "/user/songs/delete"
+
+
 
 export const FETCH_LIKES = '/FETCH_LIKES'
+
+
+export const deleteSong = (songId, deleteSongConfirm) =>({
+    type: DELETE_SONG,
+    payload: {
+        songId,
+        deleteSongConfirm
+    }
+})
 
 export const loadUser = user => ({
     type: LOAD_USER,
@@ -26,9 +42,12 @@ export const createPlaylists = playlists => ({
     type: CREATE_PLAYLISTS,
     payload: playlists
 })
-export const deletePlaylists = playlists => ({
+export const deletePlaylists = (playlists,playlistId) => ({
     type: DELETE_PLAYLISTS,
-    payload: playlists
+    payload: {
+        playlists,
+        playlistId
+    }
 })
 
 export const addSongToPlaylist = id => ({
@@ -56,7 +75,6 @@ export const thunkFetchUser = () => async dispatch => {
     const response = await fetch(`/api/users/current`);
     if (response.ok) {
         const user = await response.json();
-        console.log("response", response)
         dispatch(loadUser(user));
     }
 };
@@ -65,7 +83,6 @@ export const thunkFetchSongs = () => async dispatch => {
     const response = await fetch('/api/songs/user/current')
     if (response.ok) {
         const songs = await response.json();
-        console.log(songs)
         dispatch(fetchSongs(songs))
     }
 }
@@ -77,7 +94,25 @@ export const thunkFetchPlaylists = () => async dispatch => {
         dispatch(fetchPlaylists(playlists));
     }
 };
+// delete song
+export const thunkDeleteSong = (songId) => async dispatch =>{
+    const res = await fetch(`/api/songs/${songId}`,{
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 
+    if(res.ok){
+        const deleteSongConfirm = await res.json()
+        dispatch(deleteSong(songId, deleteSongConfirm))
+        return deleteSongConfirm
+    }
+    else{
+        return "thunk delete song error"
+    }
+
+}
 
 export const thunkCreatePlaylists = (playlists) => async dispatch => {
     const res = await fetch('/api/playlists/new', {
@@ -103,7 +138,7 @@ export const thunkDeletePlaylists = (playlistId) => async dispatch => {
 
     if (res.ok) {
         const deletePlaylistConfirm = await res.json()
-        dispatch(deletePlaylists(deletePlaylistConfirm))
+        dispatch(deletePlaylists(deletePlaylistConfirm,playlistId))
         return deletePlaylistConfirm
     }
     else {
@@ -153,6 +188,29 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 playlists: action.payload
             }
+        case DELETE_PLAYLISTS: {
+            const message = action.payload.playlists.message
+            if(message === "delete successful"){
+            const newPlaylist = state.playlists.filter(playlist => playlist.id !== action.payload.playlistId)
+            return {
+                ...state,
+                playlists: newPlaylist
+            }
+        }
+    
+        return {...state}
+        }
+        case DELETE_SONG: {
+            if(action.payload.deleteSongConfirm.message === "delete successful"){
+                const newSongs = state.songs.filter(song => song.id !== action.payload.songId)
+                return {
+                    ...state,
+                    songs: newSongs
+                }
+               
+            }
+            return {...state}
+        }
         case FETCH_LIKES:
             return {
                 ...state,
