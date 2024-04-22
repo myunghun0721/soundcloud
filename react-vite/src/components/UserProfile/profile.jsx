@@ -6,6 +6,7 @@ import './profile.css';
 import UserTracks from "./UserTracks/userTracks";
 import UserPlaylists from "./UserPlaylists/userPlaylists";
 
+
 const PopupForm = ({ user, onClose }) => {
     return (
         <div className="popup-container">
