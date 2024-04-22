@@ -3,10 +3,10 @@ import { useModal } from '../../context/Modal';
 import './AddPlaylistModal.css'
 import { useEffect, useState } from 'react';
 import { thunkAddSongToPlaylist, thunkCreatePlaylists, thunkFetchPlaylists } from '../../redux/user';
-import { FaCamera } from "react-icons/fa";
+// import { FaCamera } from "react-icons/fa";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import CreatePlaylistModal from '../CreatePlaylistModal';
-import { Navigate, useNavigate } from 'react-router-dom';
+// import { Navigate, useNavigate } from 'react-router-dom';
 
 function AddPlaylistModal({ songId }) {
     const { closeModal } = useModal();
