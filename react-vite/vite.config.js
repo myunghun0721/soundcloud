@@ -14,7 +14,7 @@ export default defineConfig((mode) => ({
   server: {
     open: true,
     proxy: {
-      "/api": "https://soundcloud-project-m0ku.onrender.com",
+      "/api": "http://127.0.0.1:8000",
     },
   },
 }));

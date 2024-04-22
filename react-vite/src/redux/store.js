@@ -16,11 +16,7 @@ const rootReducer = combineReducers({
   songs: songReducer,
   comments: commentReducer,
   likes: likeReducer,
-<<<<<<< HEAD
   users: userReducer,
-=======
-  users: userReducer
->>>>>>> parent of b545ed1 (b)
 });
 
 let enhancer;
