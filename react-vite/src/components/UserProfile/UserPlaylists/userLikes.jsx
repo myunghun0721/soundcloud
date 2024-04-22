@@ -35,7 +35,9 @@ const LikedSongs = () => {
                         const song = songsById[song_id];
                         return song ? (
                             <div key={song_id} className="song-item">
-                                <img src={`https://placehold.co/400`} alt={`Placeholder for ${song.title}`} className="album-image" />
+                            <a href={`/songs/${song.id}`}>
+                                <img src={song.preview_img} alt={`Placeholder for ${song.title}`} className="album-image" />
+                            </a>
                                 <div className="song-details">
                                     <div className="song-title">{song.title}</div>
                                     <div className="song-album">{song.album}</div>

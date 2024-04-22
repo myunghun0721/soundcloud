@@ -175,6 +175,11 @@ const songReducer = (state={}, action) =>{
             delete newSongState[action.payload]
             return newSongState
         }
+        case UPDATE_SONG: {
+            const editSongState = {...state}
+            editSongState[action.payload.song] = action.payload
+            return editSongState
+        }
 
         default:
             return state

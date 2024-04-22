@@ -65,3 +65,16 @@
     width: 70px;
     height: 35px;
 }
+
+.updateButton {
+    list-style-type: none;
+    width: 70px;
+    height: 35px;
+    border: none;
+    color: black;
+    text-decoration: none;
+}
+
+.updateButton:hover {
+    color: rgb(242, 169, 11);
+}

@@ -1,5 +1,9 @@
 from flask import Blueprint, jsonify, request
+<<<<<<< HEAD
 from app.models import Song, db, Playlist, User, playlist_songs
+=======
+from app.models import Song, db, Playlist, User, Song, playlist_songs
+>>>>>>> combined-with-test
 from app.forms import PlaylistForm
 from flask_login import current_user, login_required
 from datetime import datetime
@@ -69,6 +73,7 @@ def post_playlist():
         db.session.add(new_playlist)
         db.session.commit()
         return new_playlist.to_dict()
+<<<<<<< HEAD
 
     return {"message": "validation failed"}, 401
 
@@ -80,3 +85,19 @@ def add_song_playlist(playlistId, songId):
     db.session.execute(song)
     db.session.commit()
     return {"message": "added song to the playlist"}
+=======
+    return {"message": "validation failed"}
+
+@playlist_routes.route('/<int:playlist_id>/songs', methods=['POST'])
+@login_required
+def get_playlist_songs(playlist_id):
+    playlist = Playlist.query.get(playlist_id)
+
+    if playlist is None:
+        return jsonify("playlist not found"), 404
+
+    songs = db.session.query(Song.id).join(playlist_songs).filter(playlist_songs.c.playlist_id == playlist_id).all()
+
+
+    return jsonify(songs.to_dict())
+>>>>>>> combined-with-test

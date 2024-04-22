@@ -4,6 +4,7 @@ import { thunkFetchSongs } from "../../../redux/user";
 import './userTracks.css'
 import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
 import DeleteSongModal from "../../DeleteModal";
+import { Link } from 'react-router-dom'
 
 const UserTracks = () => {
     const dispatch = useDispatch();
@@ -20,13 +21,17 @@ const UserTracks = () => {
                 <div className="songs-grid">
                     {songs.map(song => (
                         <div key={song.id} className="song-item">
-                            {/* <img src="https://placehold.co/400" alt={`Placeholder for ${song.title}`} /> */}
-                            <img src={song.preview_img ? song.preview_img : "../../public/soundcloud-icon.png"} alt={`Placeholder for ${song.title}`} />
+                            <a href={`/songs/${song.id}`}>
+                                <img src={song.preview_img} alt={`Placeholder for ${song.preview_img}`} />
+                            </a>
                             <div className="song-details">
                                 <div className="song-title">{song.title}</div>
                                 <div className="song-artist">by {song.artist}</div>
                             </div>
                             <div className="div-button-holder">
+                                <button className ="updateButton">
+                                    <Link to={`/song/${song.id}/edit`} className="updateButton">Update</Link>
+                                </button>
                                 {/* <button onClick={(e) => updateSong(e, song.id)}><p>Update</p></button> */}
 
                                 <button className="deleteButton">

@@ -29,7 +29,11 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    max-width: 1135px;
+    max-width: 58%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
     border-bottom: 2px solid grey;
     padding-bottom: 10px;
     margin-left: auto;
@@ -42,18 +46,14 @@
     font-size: 20px;
 }
 
+
 .profile-button {
     padding: 10px 20px;
     background-color: #fff;
     color: #000;
-    border: 1px solid #000;
     border-radius: 2px;
     cursor: pointer;
-    font-weight: 3px;
-    height: auto;
-}
-.profile-link{
-    padding: 10px;
+    white-space: nowrap;
 }
 .profile-link:hover {
     color: purple;
