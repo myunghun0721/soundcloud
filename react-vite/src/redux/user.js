@@ -41,7 +41,6 @@ export const fetchLikes = likes => ({
     payload: likes
 })
 
-
 export const thunkFetchLikes= () => async dispatch => {
     const response = await fetch('/api/song/likes/user/current');
     if (response.ok) {
@@ -50,7 +49,6 @@ export const thunkFetchLikes= () => async dispatch => {
         dispatch(fetchLikes(likes))
     }
 }
-
 
 //thunk for fetch user
 export const thunkFetchUser = () => async dispatch => {
@@ -133,7 +131,8 @@ export const thunkAddSongToPlaylist = (playlistId, songId) => async dispatch => 
 const initialState = {
     users: null,
     songs: [],
-    playlists: []
+    playlists: [],
+    likes: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -158,7 +157,6 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 likes: action.payload
             }
-
         default:
             return state;
     }

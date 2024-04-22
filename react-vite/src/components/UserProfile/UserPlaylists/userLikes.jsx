@@ -7,6 +7,7 @@ import './userLikes.css';
 const LikedSongs = () => {
     const dispatch = useDispatch();
     const likedSongs = useSelector(state => state.users.likes);
+    console.log("=====> likedsong", likedSongs)
     const songsById = useSelector(state => state.songs);
     const fetchedSongIds = useRef(new Set());
 

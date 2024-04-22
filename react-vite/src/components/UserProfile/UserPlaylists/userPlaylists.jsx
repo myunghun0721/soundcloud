@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkFetchPlaylists } from "../../../redux/user";
 import './userPlaylists.css';
 import OpenModalMenuItem from "../../Navigation/OpenModalMenuItem";
-import DeleteSongModal from "../../DeleteModal";
+// import DeleteSongModal from "../../DeleteModal";
 import DeletePlaylistModal from "../../DeletePlaylistModal";
 
 const UserPlaylists = () => {

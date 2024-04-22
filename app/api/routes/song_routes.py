@@ -154,7 +154,7 @@ def get_song_details(songId):
 
     return song.to_dict()
 
-@song_routes.route('/user/current')
+@song_routes.route('user/current')
 @login_required
 def get_all_songs_current():
     # return "hello"
