@@ -11,11 +11,13 @@ import { CgProfile } from "react-icons/cg";
 import { FaHeart } from "react-icons/fa";
 // import { PiPlaylistFill } from "react-icons/pi";
 
+
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  const navigate = useNavigate()
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -42,6 +44,8 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
+    navigate("/")
+    
   };
   // const navigate = useNavigate()
 

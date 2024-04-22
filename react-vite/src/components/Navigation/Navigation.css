@@ -24,6 +24,7 @@
   background-color: #ff5500;
   z-index: 1;
   color: white;
+  width: 100px;
 }
 
 .div-login,
@@ -104,7 +105,7 @@
   color: #ff5500;
 }
 
-button {
+.profile-dropdown button {
   border: none;
   margin: 15px;
   width: 80px;
@@ -114,6 +115,6 @@ button {
   border-radius: 5px;
   font-weight: bold;
 }
-button:hover {
+.button:hover {
   color: #ff5500;
 }

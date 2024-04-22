@@ -57,8 +57,7 @@ function LoginFormModal() {
           {errors.password && <p>{errors.password}</p>}
         </div>
         <button type="submit">Log In</button>
-        <hr />
-        <button type="button" onClick={loginDemo}>Login as Demo-user</button>
+        <button onClick={loginDemo}>Login as Demo-user</button>
       </form>
     </div>
   );

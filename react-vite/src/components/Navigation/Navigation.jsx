@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import { useSelector} from "react-redux"
 import "./Navigation.css";
+import soudCloudImage from '../../../dist/soundcloud-icon.png'
 
 function Navigation() {
   const sessionUser = useSelector(state => state.session.user);
@@ -10,7 +11,7 @@ function Navigation() {
     <div className='div-navigation-wrapper'>
       <div className='div-navigation-a'>
         <NavLink to="/">
-          <img className='homeImg'src='../../../public/favicon.ico' alt='Home img'></img>
+          <img className='homeImg'src={soudCloudImage} alt='Home img'></img>
         </NavLink>
           <h1>SoundCloud</h1>
       </div>

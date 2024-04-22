@@ -18,9 +18,6 @@ def song_index():
 @login_required
 def post_song():
 
-    print("=========from song route===============")
-    print("UserId, =======>", current_user)
-    print("UserId, =======>", current_user.id)
     form = AddSongForm()
     form['csrf_token'].data =request.cookies['csrf_token']
 
@@ -49,7 +46,7 @@ def post_song():
         new_song = Song(**params)
         db.session.add(new_song)
         db.session.commit()
-        print(new_song.to_dict())
+        # print(new_song.to_dict())
         return new_song.to_dict()
 
     return {"message": "validation failed"}, 401

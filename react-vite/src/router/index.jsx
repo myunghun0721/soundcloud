@@ -51,15 +51,11 @@ export const router = createBrowserRouter([
       {
         path: '/song/:songId/edit',
         element: <UpdateSong />
+      },
+      {
+        path: "/*",
+        element: <h1>Page not Found</h1>
       }
-      // {
-      //   path: "/signup",
-      //   element: <SignupFormPage />,
-      // },
-      // {
-      //   path: "test",
-      //   element: <TestPage />
-      // }
     ],
   },
 ]);

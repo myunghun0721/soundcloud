@@ -21,7 +21,7 @@ class Song(db.Model, UserMixin):
     song_url = db.Column(db.String(255))
 
     #relationships
-    comments = db.relationship('Comment', back_populates='song')
+    comments = db.relationship('Comment', back_populates='song', cascade='all, delete, delete-orphan')
     user = db.relationship("User", back_populates="songs")
 
     # join table relationship

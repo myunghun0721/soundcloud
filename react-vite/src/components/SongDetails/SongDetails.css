@@ -23,7 +23,8 @@
 }
 
 .comment-input-container input {
-    width: 100%;
+    box-sizing: border-box;
+    width: 542px;
     height: 30px;
     /* padding: 8px; */
     border: 0.5px solid #ccc;
@@ -46,27 +47,37 @@
 }
 
 .avatar {
-    width: 46px; /* Adjust size to match your design */
-    height: 46px; /* Adjust size to match your design */
-    border-radius: 50%; /* Fully round to create a circle */
+    width: 46px; 
+    height: 46px; 
+    border-radius: 50%; 
     margin-right: 12px; 
     object-fit: cover; 
     
 }
 
 .send-button {
-    bottom: 10px;
-    margin-bottom: 20px;
+    /* bottom: 10px; */
+    margin-bottom: 11px;
+    margin-left: 11px;
     background-color: orangered ;
     color: aliceblue;
+    border: none;
+    /* margin: 15px; */
+    width: 50px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: 700;
 }
 
 .send-button:hover {
-    bottom: 10px;
-    margin-bottom: 20px;
+    /* bottom: 10px; */
+    /* margin-bottom: 20px; */
     background-color: rgb(206, 108, 72) ;
     color: aliceblue;
      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+     margin-bottom: 11px;
+     margin-left: 11px;
 }
 
 .comment-input:focus{
@@ -90,13 +101,112 @@ hr {
 .comment-text {
     margin: 10px 0;
     padding: 10px;
-    background-color: #f0f0f0; /* Light gray background for each comment */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for a 3D effect */
-    font-family: Arial, sans-serif; /* Set the font style */
-    font-size: 0.95rem; /* Adjust font size */
-    color: #333; /* Dark grey text color for better readability */
+    background-color: #f0f0f0; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    font-family: Arial, sans-serif; 
+    font-size: 0.95rem; 
+    color: #333; 
     margin: 10px 0;
     padding: 15px; 
     word-wrap: break-word
+}
+.post-button-song-detail {
+    list-style: none;
+}
+.hide-send-button {
+    display: none;
+}
+.commnent-sorting {
+    border: 1px solid orangered;
+    margin-top: 5px;
+    width: 150px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    color: orangered;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+
+}
+
+
+.select-sort{
+    border: 0px;
+    color: orangered;
+    background-color: transparent;
+    width: 100%; 
+    padding-left:50px;
+    border: none; 
+    
+    
+    
+}
+.select-sort:focus {
+    outline: none;
+     /* box-shadow: 0 2px 4px rgba(0,0,0,0.1);  */
+     
+
+}
+.select-sort:hover {
+    color: white;
+    width: 100%;
+    background-color: orangered;
+    height: 100%;
+}
+.commnent-sorting:hover {
+    /* background-color: orangered; */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+
+
+}
+
+
+
+.confirm-delete {
+    position: absolute;
+    width: 300px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: white;
+    border-radius: 5px;
+    z-index: 100; 
+  }
+  .confirm-delete > button {
+    margin-top: 10px;
+    margin-right: 100px;
+  }
+
+.comment-text-edit {
+    box-sizing: border-box;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f0f0f0; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    font-family: Arial, sans-serif; 
+    font-size: 0.95rem; 
+    color: #333; 
+    margin: 10px 0;
+    padding: 15px; 
+    border: none;
+    width: 264px;
+    word-wrap: break-word
+
+    
+}
+.comment-text-edit:focus{
+    outline: none;
+}
+
+
+.edit-delete {
+    display: flex;
+    justify-content:space-between;
+}
+.save-cancel {
+    display: flex;
+    justify-content: space-between;
 }
