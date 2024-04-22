@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkFetchSongsById, thunkUpdateSong, thunkFetchSongs } from '../../redux/songs';
@@ -19,6 +19,7 @@ const UpdateSong = () => {
     const [releaseDate, setReleaseDate] = useState('');
     const [previewImg, setPreviewImg] = useState(null);
     const [songUrl, setSongUrl] = useState(null);
+    const [error, setError] = useState({});
 
     useEffect(() => {
         if (parsedSongId) {
@@ -69,25 +70,43 @@ const UpdateSong = () => {
         }
     };
 
+    useEffect(() => {
+        const errObj = {}
+        if (!title.length) errObj.title = "Title required"
+        if (!artist.length) errObj.artist = "Artist required"
+        if (!album.length) errObj.album = "Album required"
+        if (!releaseDate) errObj.releaseDate = "Release date required"
+        if (!genre.length) errObj.genre = "Genre required"
+        if (!previewImg) errObj.previewImg = "Preview image required"
+        if (!songUrl) errObj.songUrl = "Song required"
+
+        setError(errObj)
+    }, [title, artist, album, releaseDate, genre, previewImg, songUrl])
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('artist', artist);
-        formData.append('album', album);
-        formData.append('release_date', releaseDate);
-        formData.append('genre', genre);
-        if (previewImg) {
-            formData.append('preview_img', previewImg);
+        if (Object.keys(error).length === 0) {
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('artist', artist);
+            formData.append('album', album);
+            formData.append('release_date', releaseDate);
+            formData.append('genre', genre);
+            if (previewImg) {
+                formData.append('preview_img', previewImg);
+            }
+            if (songUrl) {
+                formData.append('song_url', songUrl);
+            }
+            const updatedSong = await dispatch(thunkUpdateSong(formData, parsedSongId));
+            dispatch(thunkFetchSongs())
+            toast.success("Successfully updated song", {
+                onClose: () => navigate(`/`)
+            });
+        } else {
+            toast.error("Please fill in all the required fields.");
         }
-        if (songUrl) {
-            formData.append('song_url', songUrl);
-        }
-        const updatedSong = await dispatch(thunkUpdateSong(formData, parsedSongId));
-        dispatch(thunkFetchSongs())
-        toast.success("Successfully updated song", {
-            onClose: () => navigate(`/`)
-        });
     };
 
     return (
@@ -96,24 +115,31 @@ const UpdateSong = () => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Title:</label>
                 <input type="text" id="title" name="title" value={title} onChange={handleChange} />
+                {error.title && <span className="error">{error.title}</span>}
 
                 <label htmlFor="artist">Artist:</label>
                 <input type="text" id="artist" name="artist" value={artist} onChange={handleChange} />
+                {error.artist && <span className="error">{error.artist}</span>}
 
                 <label htmlFor="album">Album:</label>
                 <input type="text" id="album" name="album" value={album} onChange={handleChange} />
+                {error.album && <span className="error">{error.album}</span>}
 
                 <label htmlFor="release_date">Release Date:</label>
                 <input type="date" id="release_date" name="release_date" value={releaseDate} onChange={handleChange} />
+                {error.releaseDate && <span className="error">{error.releaseDate}</span>}
 
                 <label htmlFor="genre">Genre:</label>
                 <input type="text" id="genre" name="genre" value={genre} onChange={handleChange} />
+                {error.genre && <span className="error">{error.genre}</span>}
 
                 <label htmlFor="preview_img">Preview Image:</label>
                 <input type="file" id="preview_img" name="preview_img" onChange={handleChange} />
+                {error.previewImg && <span className="error">{error.previewImg}</span>}
 
                 <label htmlFor="song_url">Song URL:</label>
                 <input type="file" id="song_url" name="song_url" onChange={handleChange} accept="audio/*" />
+                {error.songUrl && <span className="error">{error.songUrl}</span>}
 
                 <button type="submit">Update Song</button>
             </form>
