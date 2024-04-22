@@ -60,6 +60,7 @@
     color: #888;
     width: 100%;
 }
+<<<<<<< HEAD
 .deleteButton{
     list-style-type: none;
     width: 70px;
@@ -78,3 +79,5 @@
 .updateButton:hover {
     color: rgb(242, 169, 11);
 }
+=======
+>>>>>>> parent of b545ed1 (b)

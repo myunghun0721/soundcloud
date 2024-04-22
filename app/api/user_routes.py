@@ -15,6 +15,7 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
+<<<<<<< HEAD
 # @user_routes.route('/<int:id>')
 # @login_required
 # def user(id):
@@ -23,6 +24,8 @@ def users():
 #     """
 #     user = User.query.get(id)
 #     return user.to_dict()
+=======
+>>>>>>> parent of b545ed1 (b)
 @user_routes.route('/current')
 @login_required
 def user():

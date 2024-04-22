@@ -49,6 +49,10 @@ function ProfileButton() {
   };
   // const navigate = useNavigate()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of b545ed1 (b)
   return (
     <>
       <button className="nav-user-button" onClick={toggleMenu}>
