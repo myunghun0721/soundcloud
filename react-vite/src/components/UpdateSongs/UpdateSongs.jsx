@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkFetchSongsById, thunkUpdateSong } from '../../redux/songs';
-import './UpdateSongs.css'
+import { thunkFetchSongsById, thunkUpdateSong, thunkFetchSongs } from '../../redux/songs';
+import './UpdateSongs.css';
+import { ToastContainer, toast } from "react-toastify";
+
 
 const UpdateSong = () => {
     const { songId } = useParams();
@@ -10,18 +12,13 @@ const UpdateSong = () => {
     const navigate = useNavigate();
     const parsedSongId = parseInt(songId);
     const song = useSelector(state => state.songs[parsedSongId]);
-
-    const [songData, setSongData] = useState({
-        title: '',
-        artist: '',
-        album: '',
-        release_date: '',
-        genre: '',
-        preview_img: '',
-        song_url: ''
-    });
-
-    const [errors, setErrors] = useState({});
+    const [title, setTitle] = useState('');
+    const [artist, setArtist] = useState('');
+    const [album, setAlbum] = useState('');
+    const [genre, setGenre] = useState('');
+    const [releaseDate, setReleaseDate] = useState('');
+    const [previewImg, setPreviewImg] = useState(null);
+    const [songUrl, setSongUrl] = useState(null);
 
     useEffect(() => {
         if (parsedSongId) {
@@ -31,81 +28,95 @@ const UpdateSong = () => {
 
     useEffect(() => {
         if (song) {
-            const formattedReleaseDate = new Date(song.release_date).toISOString().split('T')[0];
-            setSongData({
-                title: song.title || '',
-                artist: song.artist || '',
-                album: song.album || '',
-                release_date: formattedReleaseDate || '',
-                genre: song.genre || '',
-                preview_img: song.preview_img || '',
-                song_url: song.song_url || ''
-            });
+            setTitle(song.title || '');
+            setArtist(song.artist || '');
+            setAlbum(song.album || '');
+            setGenre(song.genre || '');
+            setReleaseDate(song.release_date);
         }
     }, [song]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setSongData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
-
-    const validateInputs = () => {
-        const errors = {};
-        if (!songData.title) errors.title = "Title is required";
-        if (!songData.artist) errors.artist = "Artist is required";
-        setErrors(errors);
-        return Object.keys(errors).length === 0;
+        const { name, value, files, type } = e.target;
+        switch (name) {
+            case 'title':
+                setTitle(value);
+                break;
+            case 'artist':
+                setArtist(value);
+                break;
+            case 'album':
+                setAlbum(value);
+                break;
+            case 'release_date':
+                setReleaseDate(value);
+                break;
+            case 'genre':
+                setGenre(value);
+                break;
+            case 'preview_img':
+                if (type === 'file' && files.length > 0) {
+                    setPreviewImg(files[0]);
+                }
+                break;
+            case 'song_url':
+                if (type === 'file' && files.length > 0) {
+                    setSongUrl(files[0]);
+                }
+                break;
+            default:
+                break;
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validateInputs()) {
-            try {
-                await dispatch(thunkUpdateSong({ ...songData, id: parsedSongId }));
-                navigate(`/songs/${parsedSongId}`);
-            } catch (error) {
-                console.error("Error updating song", error);
-            }
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('artist', artist);
+        formData.append('album', album);
+        formData.append('release_date', releaseDate);
+        formData.append('genre', genre);
+        if (previewImg) {
+            formData.append('preview_img', previewImg);
         }
+        if (songUrl) {
+            formData.append('song_url', songUrl);
+        }
+        const updatedSong = await dispatch(thunkUpdateSong(formData, parsedSongId));
+        dispatch(thunkFetchSongs())
+        toast.success("Successfully updated song", {
+            onClose: () => navigate(`/`)
+        });
     };
 
     return (
         <div className="update-song-form">
+            <ToastContainer />
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="title">Title:</label>
+                <input type="text" id="title" name="title" value={title} onChange={handleChange} />
 
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Title:</label>
-            <input type="text" id="title" name="title" value={songData.title} onChange={handleChange} />
-            {errors.title && <p className="error-message">{errors.title}</p>}
+                <label htmlFor="artist">Artist:</label>
+                <input type="text" id="artist" name="artist" value={artist} onChange={handleChange} />
 
-            <label htmlFor="artist">Artist:</label>
-            <input type="text" id="artist" name="artist" value={songData.artist} onChange={handleChange} />
-            {errors.artist && <p className="error-message">{errors.artist}</p>}
+                <label htmlFor="album">Album:</label>
+                <input type="text" id="album" name="album" value={album} onChange={handleChange} />
 
-            <label htmlFor="album">Album:</label>
-            <input type="text" id="album" name="album" value={songData.album} onChange={handleChange} />
-            {errors.album && <p className="error-message">{errors.album}</p>}
+                <label htmlFor="release_date">Release Date:</label>
+                <input type="date" id="release_date" name="release_date" value={releaseDate} onChange={handleChange} />
 
-            <label htmlFor="release_date">Release Date:</label>
-            <input type="date" id="release_date" name="release_date" value={songData.release_date} onChange={handleChange} />
-            {errors.release_date && <p className="error-message">{errors.release_date}</p>}
+                <label htmlFor="genre">Genre:</label>
+                <input type="text" id="genre" name="genre" value={genre} onChange={handleChange} />
 
-            <label htmlFor="genre">Genre:</label>
-            <input type="text" id="genre" name="genre" value={songData.genre} onChange={handleChange} />
-            {errors.genre && <p className="error-message">{errors.genre}</p>}
+                <label htmlFor="preview_img">Preview Image:</label>
+                <input type="file" id="preview_img" name="preview_img" onChange={handleChange} />
 
-            <label htmlFor="preview_img">Preview Image URL:</label>
-            <input type="text" id="preview_img" name="preview_img" value={songData.preview_img} onChange={handleChange} />
-            {errors.preview_img && <p className="error-message">{errors.preview_img}</p>}
+                <label htmlFor="song_url">Song URL:</label>
+                <input type="file" id="song_url" name="song_url" onChange={handleChange} accept="audio/*" />
 
-            <label htmlFor="song_url">Song URL:</label>
-            <input type="text" id="song_url" name="song_url" value={songData.song_url} onChange={handleChange} />
-            {errors.song_url && <p className="error-message">{errors.song_url}</p>}
-
-            <button type="submit">Update Song</button>
-        </form>
+                <button type="submit">Update Song</button>
+            </form>
         </div>
     );
 };
