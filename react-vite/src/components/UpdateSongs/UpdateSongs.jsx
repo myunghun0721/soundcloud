@@ -126,7 +126,7 @@ const UpdateSong = () => {
                 {error.album && <span className="error">{error.album}</span>}
 
                 <label htmlFor="release_date">Release Date:</label>
-                <input type="date" id="release_date" name="release_date" value={releaseDate} onChange={handleChange} />
+                <input required type="date" id="release_date" name="release_date" value={releaseDate} onChange={handleChange} />
                 {error.releaseDate && <span className="error">{error.releaseDate}</span>}
 
                 <label htmlFor="genre">Genre:</label>
