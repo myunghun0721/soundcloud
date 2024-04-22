@@ -132,18 +132,34 @@ def edit_song(songId):
 
     if form.validate_on_submit():
 
-        song.title = form.data['title']
-        song.artist = form.data['artist']
-        song.album = form.data['album']
-        song.release_date = form.data['release_date']
-        song.genre = form.data['genre']
-        song.preview_img = form.data['preview_img']
-        song.song_url= form.data['song_url']
+        remove_file_from_s3(song.preview_img) if '/' in song.preview_img else None
+        remove_file_from_s3(song.song_url) if '/' in song.song_url else None
 
+        song_url = form.data["song_url"]
+        print(song_url)
+        song_url.filename = get_unique_filename(song_url.filename)
+        song_upload = upload_file_to_s3(song_url)
+
+        preview_img = form.data['preview_img']
+        if(preview_img):
+            preview_img.filename = get_unique_filename(preview_img.filename)
+            preview_img_upload = upload_file_to_s3(preview_img)
+
+        song.title= form.data['title']
+        song.artist =form.data['artist']
+        song.album =form.data['album']
+        song.release_date = form.data['release_date']
+        song.genre =form.data['genre']
+        song.user_id=current_user.id
+        song.preview_img= preview_img_upload['url'] if preview_img else None
+        song.song_url = song_upload['url']
 
         db.session.commit()
         return song.to_dict()
-    return {form.errors}
+
+    # return {form.errors}
+    print(form.errors)
+    return jsonify("not updated"), 404
 
 @song_routes.route('/<int:songId>')
 def get_song_details(songId):
@@ -154,7 +170,7 @@ def get_song_details(songId):
 
     return song.to_dict()
 
-@song_routes.route('user/current')
+@song_routes.route('/user/current')
 @login_required
 def get_all_songs_current():
     # return "hello"

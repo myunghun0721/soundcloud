@@ -13,5 +13,5 @@ class AddSongForm(FlaskForm):
     genre = StringField('Genre', validators=[DataRequired()])
     # preview_img = StringField('Preview Image URL')
     # song_url = StringField('Song Url')
-    preview_img = StringField('preview image', validators=[DataRequired()])
+    preview_img = FileField('preview image', validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
     song_url = FileField('Song',validators=[FileAllowed(list(AUDIO_ALLOWED_EXTENSIONS))])

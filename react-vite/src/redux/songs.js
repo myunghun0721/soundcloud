@@ -100,34 +100,13 @@ export const thunkDeleteSong = (songId) => async dispatch =>{
 
 }
 
-export const thunkUpdateSong = (song) => async (dispatch) => {
-    const {
-      id,
-      title,
-      artist,
-      album,
-      release_date,
-      genre,
-      preview_img,
-      song_url,
-    } = song;
-
-    try {
+export const thunkUpdateSong = (song, id) => async (dispatch) => {
       const response = await fetch(`/api/songs/${id}`, {
         method: "PUT",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title,
-          artist,
-          album,
-          release_date,
-          genre,
-          preview_img,
-          song_url,
-        }),
+        body: song
       });
+
+      console.log("=========>", response)
 
       if (!response.ok) {
         throw new Error('Failed to update the song.');
@@ -136,10 +115,8 @@ export const thunkUpdateSong = (song) => async (dispatch) => {
       const updatedSong = await response.json();
       dispatch(updateSong(updatedSong));
       return updatedSong;
-    } catch (error) {
-      console.error('Error updating song:', error);
     }
-  };
+
 
 
 
@@ -175,7 +152,7 @@ const songReducer = (state={}, action) =>{
         }
         case UPDATE_SONG: {
             const editSongState = {...state}
-            editSongState[action.payload.song] = action.payload
+            editSongState[action.payload.id] = action.payload
             return editSongState
         }
 

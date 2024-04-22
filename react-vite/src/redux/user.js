@@ -65,6 +65,7 @@ export const thunkFetchSongs = () => async dispatch => {
     const response = await fetch('/api/songs/user/current')
     if (response.ok) {
         const songs = await response.json();
+        console.log(songs)
         dispatch(fetchSongs(songs))
     }
 }

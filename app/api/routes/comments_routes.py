@@ -5,15 +5,15 @@ from flask_login import login_required, current_user
 
 comment_routes = Blueprint('comments', __name__)
 
-@comment_routes.route('/comments', methods=['GET'])
+@comment_routes.route('/<int:songId>/comments', methods=['GET'])
 def get_all_comments(songId):
-
+     
     comments = Comment.query.filter_by(song_id=songId).all()
     comments = [comment.to_dict() for comment in comments]
     # return jsonify([comment.to_dict() for comment in comments])
     return jsonify(comments)
 
-@comment_routes.route('/comments/new', methods=['POST'])
+@comment_routes.route('/<int:songId>/comments/new', methods=['POST'])
 @login_required
 def post_comment(songId):
 
@@ -23,7 +23,7 @@ def post_comment(songId):
     form['csrf_token'].data =request.cookies['csrf_token']
 
     current_body = form.data['body']
-
+    
 
     if form.validate_on_submit():
         comment = Comment(song_id=songId, user_id=current_user_id, body=current_body)\
@@ -35,7 +35,7 @@ def post_comment(songId):
         print(form.errors)
         return jsonify("validation failed"),401
 
-@comment_routes.route('/comments/<int:commentId>', methods=['PUT'])
+@comment_routes.route('/<int:songId>/comments/<int:commentId>', methods=['PUT'])
 def update_comment(songId, commentId):
     form = AddCommentForm()
     form['csrf_token'].data =request.cookies['csrf_token']
@@ -57,7 +57,7 @@ def update_comment(songId, commentId):
         return jsonify("form not validated"), 401
 
 
-@comment_routes.route('/comments/<int:commentId>/delete', methods=['DELETE'])
+@comment_routes.route('/<int:songId>/comments/<int:commentId>/delete', methods=['DELETE'])
 @login_required
 def delete_comment(songId, commentId):
     comment = Comment.query.get(commentId)
