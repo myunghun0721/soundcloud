@@ -105,8 +105,8 @@ export const thunkDeleteSong = (songId) => async dispatch =>{
 
     if(res.ok){
         const deleteSongConfirm = await res.json()
-        dispatch(deleteSong(songId, deleteSongConfirm))
-        dispatch(deleteSongStore(songId, deleteSongConfirm))
+        await dispatch(deleteSong(songId, deleteSongConfirm))
+        await dispatch(deleteSongStore(songId, deleteSongConfirm))
         return deleteSongConfirm
     }
     else{
