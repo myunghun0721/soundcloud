@@ -1,14 +1,16 @@
 import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { thunkFetchSongById } from "../../redux/songs"
+import { loadSongs, thunkFetchSongById } from "../../redux/songs"
 import { clearComment, editComment, thunkEditComment, thunkFetchComments } from "../../redux/comments"
-import { thunkFetchLikes } from "../../redux/likes"
+import { clearLikes, thunkFetchLikes } from "../../redux/likes"
 import { useParams } from 'react-router-dom'
 import SongDetailsHeader from "../SongDetailsHeader/SongDetailsHeader"
 import { thunkPostComment } from "../../redux/comments"
 import { thunkDeleteComment } from "../../redux/comments"
 // import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 import {ToastContainer, toast} from 'react-toastify'
+import LikeButton from "./LikeButton"
+import { thunkFetchUser } from "../../redux/user"
 
 
 
@@ -31,15 +33,23 @@ const SongDetails = () => {
     // because during the normalization process in the Redux store if not match
     // Song Id was found
     const song = useSelector(state => state.songs[songId])
+    // Retrivew currenUser info
     //Retrieve comments from redux store
     const commentsObj = useSelector(state => state.comments)
     const comments = Object.values(commentsObj)
     // Retrieving the user from redux store
     const user = useSelector(state => state.session.user)
-    console.log("this is the user", user)
     // Retrieve likes from redux store
     const likesObj = useSelector(state => state.likes)
-    const { likeCount } = likesObj
+    const likesOfSong = likesObj.likeCounts
+    
+
+
+
+    
+    const likeCount = likesOfSong[songId]
+
+
     // if song is invalid i
     const likeCountNumber = typeof likeCount === "number" ? likeCount : 0
         // comment field state
@@ -200,15 +210,20 @@ const SongDetails = () => {
 
     // fetch the song by it id from backend server
     useEffect(() => {
+       
         //Retrieve song base on song id
-        dispatch(thunkFetchSongById(parseInt(songId)))
-        // Retrieve backend message if there is no id match for song
-        .then(data => {
-            if(data.message){
-                // console.log("from component",data)
-                setErrors(data)
-            }
-        })
+        if(!song) {
+            dispatch(thunkFetchSongById(parseInt(songId)))
+            // Retrieve backend message if there is no id match for song
+            .then(data => {
+                if(data.message){
+                    // console.log("from component",data)
+                    setErrors(data)
+                }
+            })
+        }
+        dispatch(clearLikes())
+        // get all user content if logged in
         // Retrieve comments of the Song
         dispatch(thunkFetchComments(parseInt(songId)))
         dispatch(thunkFetchLikes(parseInt(songId)))
@@ -252,8 +267,23 @@ let commentCount  = comments.length
                 { !showLogin && user ? (<button className={newComment.length > 1 ?  "send-button" : "hide-send-button"} onClick={submitComment}>POST</button>) :
                 ( <OpenModalMenuItem className={"post-button-song-detail"} itemText={<button className="send-button">POST</button>} modalComponent={<LoginFormModal  />} onModalClose={() => setShowLogin(false)}/>)}
             </section>
-            
-            <h3>likes: {likeCountNumber}</h3>
+            <div className="like-div">
+                {user &&
+                    <div className="like-playlist-container">
+                        <button className="add-playlist">
+                        <OpenModalMenuItem
+                            className={"add-playlist-button"}
+                            itemText="Add to playlist"
+                        //     onItemClick={closeMenu}
+                            modalComponent={<AddPlaylistModal songId={song.id} />}
+                        />
+                    </button>
+                         <LikeButton className={"like-song-button"} user={user} songId={songId}/>
+                    </div>
+                    }
+                
+                <h3 className="like-count">likes: {likeCountNumber}</h3>
+            </div>
 
             {errors.message && <h1>{errors.message}</h1>}
             <hr />
@@ -317,16 +347,7 @@ let commentCount  = comments.length
 
             </section>}
 
-            {/* display add to playlist when user logged in */}
-            { user && <div>
-                <button className="add-playlist">
-                    <OpenModalMenuItem
-                        itemText="Add to playlist"
-                        //     onItemClick={closeMenu}
-                        modalComponent={<AddPlaylistModal songId={song.id} />}
-                    />
-                </button>
-            </div>}
+            
         </div>
     )
 }
