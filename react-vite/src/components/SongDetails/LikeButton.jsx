@@ -6,10 +6,10 @@ import { thunkAddLike, thunkRemoveLike } from "../../redux/likes"
 const LikeButton = ({songId,user, className }) =>{
    
     // Retrieve like from redux state using SongId
-    const likesBySong = useSelector(state => state.likes.likesBySong[songId] || [])
+    const likesBySong = useSelector(state => state.likes.likesBySong[songId])
 
     // Checking if user has like the song yet
-    const isLiked = likesBySong.some(like => like.user_id === user?.id)
+    const isLiked = likesBySong?.some(like => like.user_id === user?.id)
 
     const dispatch = useDispatch()
     const handAddLike = () => {

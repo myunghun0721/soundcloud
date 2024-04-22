@@ -98,8 +98,8 @@ const likeReducer = (state=initailState, action) => {
             const songId = like_info.length > 0 ? like_info[0].song_id: null
             if(songId === null && like_info.length === 0){
                 return {...state,
-                    likesBySong: {},
-                    likeCounts: {}
+                    likesBySong: [],
+                    likeCounts: []
                 }
 
             }

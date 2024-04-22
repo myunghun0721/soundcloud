@@ -26,9 +26,12 @@ export const createPlaylists = playlists => ({
     type: CREATE_PLAYLISTS,
     payload: playlists
 })
-export const deletePlaylists = playlists => ({
+export const deletePlaylists = (playlists,playlistId) => ({
     type: DELETE_PLAYLISTS,
-    payload: playlists
+    payload: {
+        playlists,
+        playlistId
+    }
 })
 
 export const addSongToPlaylist = id => ({
@@ -103,7 +106,8 @@ export const thunkDeletePlaylists = (playlistId) => async dispatch => {
 
     if (res.ok) {
         const deletePlaylistConfirm = await res.json()
-        dispatch(deletePlaylists(deletePlaylistConfirm))
+        console.log(deletePlaylistConfirm)
+        dispatch(deletePlaylists(deletePlaylistConfirm,playlistId))
         return deletePlaylistConfirm
     }
     else {
@@ -153,6 +157,17 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 playlists: action.payload
             }
+        case DELETE_PLAYLISTS: {
+            const message = action.payload.playlists.message
+            if(message === "delete successful"){
+            const newPlaylist = state.playlists.filter(playlist => playlist.id !== action.payload.playlistId)
+            return {
+                ...state,
+                playlists: newPlaylist
+            }
+        }
+        return {...state}
+        }
         case FETCH_LIKES:
             return {
                 ...state,
