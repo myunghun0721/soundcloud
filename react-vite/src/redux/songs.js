@@ -1,3 +1,5 @@
+import { deleteSong } from "./user";
+
 // Action type constanst
 const LOAD_SONGS = 'songs/loadSongs';
 const FETCH_SONGS_BY_ID = "FETCH_SONGS_BY_ID"
@@ -94,7 +96,8 @@ export const thunkDeleteSong = (songId) => async dispatch =>{
 
     if(res.ok){
         const deleteSongConfirm = await res.json()
-        dispatch(deleteSongStore(songId, deleteSongConfirm))
+       await  dispatch(deleteSongStore(songId, deleteSongConfirm))
+        await dispatch(deleteSong(songId, deleteSongConfirm))
         return deleteSongConfirm
     }
     else{

@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import './DeleteModal.css'
-import { thunkDeleteSong } from '../../redux/user';
-// import { thunkDeleteSong } from '../../redux/songs';
+// import { thunkDeleteSong } from '../../redux/user';
+import { thunkDeleteSong } from '../../redux/songs';
 
 
 
