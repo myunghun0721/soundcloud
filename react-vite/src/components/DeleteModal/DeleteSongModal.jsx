@@ -1,8 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import './DeleteModal.css'
-// import { thunkDeleteSong } from '../../redux/user';
-import { thunkDeleteSong } from '../../redux/songs';
+import { thunkDeleteSong } from '../../redux/user';
+// import { thunkDeleteSong } from '../../redux/songs';
+// import { deleteSong } from '../../redux/user';
+
 
 
 
@@ -16,7 +18,8 @@ function DeleteSongModal({ songId }) {
     }
     async function yesButton() {
 
-        await dispatch(thunkDeleteSong(songId))
+        await  dispatch(thunkDeleteSong(songId))
+            
         closeModal()
     }
     return (
