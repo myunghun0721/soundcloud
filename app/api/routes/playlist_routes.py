@@ -69,19 +69,6 @@ def post_playlist():
         db.session.add(new_playlist)
         db.session.commit()
         return new_playlist.to_dict()
-<<<<<<< HEAD
-
-    return {"message": "validation failed"}, 401
-
-@playlist_routes.route('/<int:playlistId>/song/<int:songId>', methods=['POST'])
-@login_required
-def add_song_playlist(playlistId, songId):
-    print("==========================", playlistId, songId)
-    song = playlist_songs.insert().values(playlist_id=playlistId, song_id=songId)
-    db.session.execute(song)
-    db.session.commit()
-    return {"message": "added song to the playlist"}
-=======
     return {"message": "validation failed"}
 
 @playlist_routes.route('/<int:playlist_id>/songs', methods=['POST'])
@@ -96,4 +83,3 @@ def get_playlist_songs(playlist_id):
 
 
     return jsonify(songs.to_dict())
->>>>>>> revert
