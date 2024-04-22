@@ -8,7 +8,7 @@ const UPDATE_SONG = "UPDATE_SONG"
 const UPLOAD_SONG = 'songs/uploadSong';
 const DELETE_SONG = 'songs/deleteSong';
 
-export const deleteSong = (songId, deleteSongConfirm) =>({
+export const deleteSongStore = (songId, deleteSongConfirm) =>({
     type: DELETE_SONG,
     payload: {
         songId,
