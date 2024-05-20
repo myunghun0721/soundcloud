@@ -80,7 +80,7 @@ function SongFormPage() {
   }, [title, artist, album, releaseDate, genre, previewImg, song])
   return (
     <div className="song-form">
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      <ToastContainer position="top-right" autoClose={300} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
       <form className="form-uploadsong" onSubmit={handleSubmit}>
         <div className="header-div">
           <h1>Upload your song</h1>

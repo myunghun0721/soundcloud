@@ -8,6 +8,10 @@ const WaveForm  = ({ url, isPlaying }) => {
     const waveformRef = useRef(null)
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
+   
+
+
+
 
 
     // Element containing audio wave
@@ -25,9 +29,9 @@ const WaveForm  = ({ url, isPlaying }) => {
 
     // console.log(url)
     // fetch the audio by using backend server at middle man to avoid cors policy
-    const audioUrl = `${backendUrl}/fetch-audio?url=${encodeURIComponent(url)}`
-    console.log(import.meta.env.VITE_BACKEND_URL)
-    console.log(import.meta.env)
+    // const audioUrl =  `${backendUrl}/fetch-audio?url=${encodeURIComponent(url)}`
+    // console.log(audioUrl)
+
     // Define the waveform gradient
 const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height * 1.35)
 gradient.addColorStop(0, '#656666') // Top color
@@ -48,6 +52,8 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
 
     useEffect(() => {
         // Create a WaveSurfer instance
+       
+       
 
         wavesurferRef.current = WaveSurfer.create({
             container: waveformRef.current, //
@@ -62,20 +68,24 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
         })
 
         // Load the audio file from the URL prop
-        wavesurferRef.current.load(audioUrl)
+        wavesurferRef.current.load(`${backendUrl}/fetch-audio?url=${encodeURIComponent(url)}`)
 
         wavesurferRef.current.on('ready', () => {
             if(isPlaying) {
                 wavesurferRef.current.play()
             }
         })
+      
 
         // clean up function
         // so the audio wont stack
-        return () => wavesurferRef.current.destroy();
-
-
-    }, []) // by using the useEffect when the url change it will trigger re-render
+        return () =>  wavesurferRef.current.destroy()
+            
+        
+    
+    }, []) 
+    
+    // by using the useEffect when the url change it will trigger re-render
     useEffect (() => {
         if(isReady) {
             isPlaying ? wavesurferRef.current.play() : wavesurferRef.current.pause()

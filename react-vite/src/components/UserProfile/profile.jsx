@@ -33,7 +33,6 @@ const UserProfile = () => {
     const [showTracks, setShowTracks] = useState(true);
     const [showDetails, setShowDetails] = useState(false);
     const [showPlaylists, setShowPlaylists] = useState(false);
-    console.log("this is my user", user)
 
     useEffect(() => {
         dispatch(thunkFetchUser());

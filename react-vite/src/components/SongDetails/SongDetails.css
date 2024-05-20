@@ -30,7 +30,7 @@
     border: 0.5px solid #ccc;
     border-radius: 10px;
     margin-bottom: 8px; /* Space between textarea and button */
-    /* resize: vertical; */
+  
     background-color:rgb(248, 241, 241);
     padding: 10px;
 }
@@ -210,3 +210,61 @@ hr {
     display: flex;
     justify-content: space-between;
 }
+
+.like-div {
+    display: flex;
+    gap: 10px;
+    width: 30%;
+    
+}
+.add-playlist {
+    list-style: none;
+    width: 100%;
+    margin-right: 10px;
+    background: linear-gradient(45deg, #e9670a 0%, #f69855 100%);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+
+}
+.like-song-button {
+    margin-left: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #ff416c, #ff4b2b);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+.add-playlist:hover {
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+  }
+  .like-playlist-container {
+    display:flex;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .like-song-button:hover {
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+  }
+  .like-count {
+    font-size: 1rem;
+    font-weight: bold; 
+    color: #333; 
+    margin-left: 10px; 
+    width: 100%;
+    padding-top: 10px;
+    
+    
+  }

@@ -69,7 +69,7 @@ function AddPlaylistModal({ songId }) {
                 </button>
                 <button className='create-option'>
                     <OpenModalMenuItem
-                        itemText="Add to playlist"
+                        itemText="Add playlist"
                         //     onItemClick={closeMenu}
                         modalComponent={<CreatePlaylistModal songId={songId}/>}
                     />

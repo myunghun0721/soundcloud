@@ -21,6 +21,7 @@ def seed_users():
 
 
     # db.session.add(demo)
+
     # db.session.add(marnie)
     # db.session.add(bobbie)
     db.session.add_all([thanh, justin, krishna, hun])

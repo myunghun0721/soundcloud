@@ -37,7 +37,7 @@ def delete_playlist(playlistId):
         return {"message": "song not found"}
 
     if current_user.id != playlist.user_id:
-        return {"message": "your nott he owner of this song", "current_user": current_user.id, "song_owner": playlist.user_id}
+        return {"message": "your nott he owner of this song", "current_user": current_user.id, "song_owner": playlist.user_id},401
 
     remove_file_from_s3(playlist.preview_img) if '/' in playlist.preview_img else None
 

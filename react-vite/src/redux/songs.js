@@ -1,3 +1,5 @@
+import { deleteSong } from "./user";
+
 // Action type constanst
 const LOAD_SONGS = 'songs/loadSongs';
 const FETCH_SONGS_BY_ID = "FETCH_SONGS_BY_ID"
@@ -8,9 +10,12 @@ const UPDATE_SONG = "UPDATE_SONG"
 const UPLOAD_SONG = 'songs/uploadSong';
 const DELETE_SONG = 'songs/deleteSong';
 
-export const deleteSong = songId =>({
+export const deleteSongStore = (songId, deleteSongConfirm) =>({
     type: DELETE_SONG,
-    payload: songId
+    payload: {
+        songId,
+        deleteSongConfirm
+    }
 })
 export const loadSongs = songs => ({
     type: LOAD_SONGS,
@@ -92,7 +97,8 @@ export const thunkDeleteSong = (songId) => async dispatch =>{
 
     if(res.ok){
         const deleteSongConfirm = await res.json()
-        dispatch(deleteSong(deleteSongConfirm))
+        // dispatch(deleteSong(songId, deleteSongConfirm))
+         dispatch(deleteSongStore(songId, deleteSongConfirm))
         return deleteSongConfirm
     }
     else{
@@ -147,10 +153,13 @@ const songReducer = (state={}, action) =>{
             return newSongsState
         }
         case DELETE_SONG: {
+            if(action.payload.deleteSongConfirm.message === "delete successful"){
             const newSongState = {...state}
-            delete newSongState[action.payload]
+            delete newSongState[action.payload.songId]
             return newSongState
         }
+        return {...state}
+    }
         case UPDATE_SONG: {
             const editSongState = {...state}
             editSongState[action.payload.id] = action.payload
