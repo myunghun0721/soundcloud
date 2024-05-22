@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef } from "react"
+import React,{ useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadSongs, thunkFetchSongById } from "../../redux/songs"
 import { clearComment, editComment, thunkEditComment, thunkFetchComments } from "../../redux/comments"
@@ -22,7 +22,7 @@ import AddPlaylistModal from "../AddPlaylistModal"
 import LoginFormModal from "../LoginFormModal"
 
 
-const SongDetails = () => {
+const SongDetails = React.memo(() => {
     // Get songId from the url
     const { songId } = useParams()
     const dispatch = useDispatch()
@@ -351,6 +351,7 @@ let commentCount  = comments.length
             
         </div>
     )
-}
+})
+SongDetails.displayName ="SongDetails"
 
 export default SongDetails

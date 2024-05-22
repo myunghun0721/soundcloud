@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './SongDetailsHeader.css'
 import WaveForm from './WaveForm'
 
-const SongDetailsHeader = ({song,user, releaseDate}) => {
+const SongDetailsHeader = React.memo(({song,user, releaseDate}) => {
     const [isPlaying, setIsPlaying] = useState(false)
     const togglePlay = () => {
         setIsPlaying(!isPlaying)
@@ -57,6 +57,7 @@ const SongDetailsHeader = ({song,user, releaseDate}) => {
             
         </main>
     )
-}
+})
+SongDetailsHeader.displayName = "SongDetailsHeader"
 
 export default SongDetailsHeader
