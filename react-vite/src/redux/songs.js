@@ -61,6 +61,7 @@ export const thunkFetchSongs = () => async dispatch => {
         dispatch(loadSongs(songs))
     }
 }
+
 export const thunkUploadSongs = (song) => async dispatch => {
     const res = await fetch('/api/songs/new',{
         method: 'POST',
