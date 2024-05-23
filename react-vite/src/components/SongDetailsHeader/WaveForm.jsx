@@ -88,8 +88,11 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
         })
 
         // Load the audio file from the URL prop
-        wavesurferRef.current.load(`${backendUrl}/fetch-audio?url=${encodeURIComponent(url)}`)
-        // wavesurferRef.current.load(url)
+        // wavesurferRef.current.load(`${backendUrl}/fetch-audio?url=${encodeURIComponent(url)}`)
+        wavesurferRef.current.load(url)
+        // console.log(url)
+        // wavesurferRef.current.load(`${url}`)
+
 
 
         wavesurferRef.current.on('ready', () => {

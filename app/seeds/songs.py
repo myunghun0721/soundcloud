@@ -46,7 +46,10 @@ def seed_songs():
         Song(song_url="https://soundcloud-aws.s3.amazonaws.com/music/Jeremy+Zucker+-+glisten+(interlude)+(Official+Audio).mp3", title="glisten", artist="Jeremy Zucker", album="Glisten", release_date=datetime(2023, 11,10), genre="indie-pop", user_id=4,
         preview_img="https://soundcloud-aws.s3.amazonaws.com/music-cover/glisten+jeremy+zucker.png"),
         Song(song_url="https://soundcloud-aws.s3.amazonaws.com/music/Chelsea+Cutler%2C+Jeremy+Zucker+-+better+off+(Live+Performance)+Vevo.mp3", title="better off", artist="Jeremy Zucker", album="Glisten", release_date=datetime(2023, 11,10), genre="indie-pop", user_id=4,
+        preview_img="https://soundcloud-aws.s3.amazonaws.com/music-cover/better+off+jeremy+zucker.png"),
+        Song(song_url="https://tastedit-bucket.s3.amazonaws.com/seize-the-day-andrey-rossi-main-version-14571-01-40.mp3", title="size the day", artist="Andrey Rossi", album="Glisten", release_date=datetime(2023, 11,10), genre="indie-pop", user_id=4,
         preview_img="https://soundcloud-aws.s3.amazonaws.com/music-cover/better+off+jeremy+zucker.png")
+        
     ]
 
     for song in songs:
