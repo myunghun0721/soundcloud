@@ -7,12 +7,17 @@ from app.aws_helpers import upload_file_to_s3, get_unique_filename, remove_file_
 
 song_routes = Blueprint('songs', __name__)
 
+
 @song_routes.route('/')
 def song_index():
     songs = Song.query.all()
     print(songs)
     # for song in songs:
     return [song.to_dict() for song in songs]
+
+@song_routes.route("/search" , methods=["GET"])
+def search():
+    query = request.args.get()
 
 @song_routes.route('/new', methods=['POST'])
 @login_required
