@@ -16,6 +16,8 @@ from .api.routes.comments_routes import comment_routes
 from .api.routes.likes_routes import likes_routes, current_likes
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
+# Application Security
+CORS(app, resources={r"/*":{"origins": ["http://localhost:5173", "https://soundcloud-project-m0ku.onrender.com/"]}})
 
 # Setup login manager
 login = LoginManager(app)
@@ -45,8 +47,7 @@ app.register_blueprint(playlist_routes, url_prefix='/api/playlists')
 db.init_app(app)
 Migrate(app, db)
 
-# Application Security
-CORS(app)
+
 
 
 # Since we are deploying with Docker and Flask,
@@ -54,6 +55,7 @@ CORS(app)
 # Therefore, we need to make sure that in production any
 # request made over http is redirected to https.
 # Well.........
+
 @app.before_request
 def https_redirect():
     if os.environ.get('FLASK_ENV') == 'production':

@@ -26,7 +26,7 @@ function HomePage() {
 
 
   }
-  console.log("this is the search", searchResult)
+
 
   useEffect(() => {
     dispatch(thunkFetchSongs())
@@ -67,7 +67,7 @@ function HomePage() {
             autoPlay
             // src={selectedSong.song_url}
             src={selectedSong.song_url ? selectedSong.song_url : "../../public/demosong.mp3"}
-            onPlay={(e) => console.log(e)}
+            
           // other props here
           />
         </div>
