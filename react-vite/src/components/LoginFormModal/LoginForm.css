@@ -35,6 +35,9 @@
 
 .login-form label {
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  
 }
 
 .login-form input {

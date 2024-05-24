@@ -7,13 +7,26 @@ import { FaCirclePlay } from "react-icons/fa6";
 // import Footer from "../Footer"
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import SearchSong from "./SearchSong";
+
 
 
 function HomePage() {
   const dispatch = useDispatch(); 
   const songObj = useSelector(state => state.songs)
-  const songs = Object.values(songObj)
+  const [searchResult, setSearchResult] = useState([])
   const [selectedSong, setSelectedSong] = useState(null);
+  const songs = searchResult.length !== 0 ? searchResult : Object.values(songObj)
+
+  // -----------Search functionality
+  const handleSearch = async(query) => {
+    const response = await fetch(`/api/songs/search?query=${encodeURIComponent(query)}`)
+    const songs = await response.json()
+    setSearchResult(songs)
+
+
+  }
+  console.log("this is the search", searchResult)
 
   useEffect(() => {
     dispatch(thunkFetchSongs())
@@ -25,7 +38,9 @@ function HomePage() {
 
   return (
     <div className="all-songs">
-    <h1 className="chart-heading">SoundCloud Charts Top 50</h1>      <div className="song-grid">
+    <h1 className="chart-heading">SoundCloud Charts Top 50</h1>
+      <SearchSong onSearch={handleSearch}/>
+      <div className="song-grid">
         {songs.map((song) => (
           <div className="grid-item" key={song.id}>
             <div className="img-div">
