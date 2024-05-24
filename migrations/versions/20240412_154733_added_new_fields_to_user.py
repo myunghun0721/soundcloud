@@ -66,11 +66,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('playlist_id', 'song_id')
     )
     with op.batch_alter_table('users', schema=None) as batch_op:
-        batch_op.add_column(sa.Column('first_name', sa.String(length=255), nullable=False))
-        batch_op.add_column(sa.Column('last_name', sa.String(length=255), nullable=False))
-        batch_op.add_column(sa.Column('city', sa.String(length=255), nullable=False))
-        batch_op.add_column(sa.Column('country', sa.String(length=255), nullable=False))
-        batch_op.add_column(sa.Column('bio', sa.String(length=255), nullable=False))
+        batch_op.add_column(sa.Column('first_name', sa.String(length=255), nullable=True))
+        batch_op.add_column(sa.Column('last_name', sa.String(length=255), nullable=True))
+        batch_op.add_column(sa.Column('city', sa.String(length=255), nullable=True))
+        batch_op.add_column(sa.Column('country', sa.String(length=255), nullable=True))
+        batch_op.add_column(sa.Column('bio', sa.String(length=255), nullable=True))
 
     # ### end Alembic commands ###
     if environment == "production":

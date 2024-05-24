@@ -15,11 +15,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    first_name = db.Column(db.String(255), nullable=False)
-    last_name = db.Column(db.String(255), nullable=False)
-    city = db.Column(db.String(255), nullable=False)
-    country = db.Column(db.String(255), nullable=False)
-    bio = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(255), nullable=True)
+    last_name = db.Column(db.String(255), nullable=True)
+    city = db.Column(db.String(255), nullable=True)
+    country = db.Column(db.String(255), nullable=True)
+    bio = db.Column(db.String(255), nullable=True)
 
 
     playlists = db.relationship("Playlist", back_populates="user", cascade="all, delete-orphan")

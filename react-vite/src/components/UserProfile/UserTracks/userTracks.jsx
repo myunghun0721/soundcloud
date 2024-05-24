@@ -9,10 +9,17 @@ import { Link } from 'react-router-dom'
 const UserTracks = () => {
     const dispatch = useDispatch();
     const songs = useSelector(state => state.users.songs);
+    
+
 
     useEffect(() => {
         dispatch(thunkFetchSongs());
     }, [dispatch]);
+    if(songs.message === "song not found") {
+        return <>
+        <h1 style={{textAlign: "center"}}>No Song Yet</h1>
+        </>
+    }
 
     return (
         <div className="user-songs-container">

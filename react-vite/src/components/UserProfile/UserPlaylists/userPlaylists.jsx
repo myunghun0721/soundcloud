@@ -10,9 +10,17 @@ const UserPlaylists = () => {
     const dispatch = useDispatch();
     const playlists = useSelector(state => state.users.playlists);
 
+    console.log(playlists)
+
     useEffect(() => {
         dispatch(thunkFetchPlaylists());
     }, [dispatch]);
+
+    if(playlists.message === "song not found"){
+        return <>
+        <h1 style={{textAlign: "center"}}>No Playlists Yet</h1>
+        </>
+    }
 
     return (
         <div className="user-playlists-container">

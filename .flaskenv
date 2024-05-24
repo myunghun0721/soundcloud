@@ -1,3 +1,5 @@
 FLASK_APP=app
 FLASK_DEBUG=true
 FLASK_RUN_PORT=8000
+SCHEMA=flask_schema
+FLASK_ENV=development
