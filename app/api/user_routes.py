@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify
-from flask_login import login_required, current_user
+from flask import Blueprint, jsonify # type: ignore
+from flask_login import login_required, current_user # type: ignore
 from app.models import User
 
 user_routes = Blueprint('users', __name__)
