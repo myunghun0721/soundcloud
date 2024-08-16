@@ -1,3 +1,7 @@
+# SoundCloud clone project
+This is full-stack application cloning famous application "SoundCloud".
+
+
 # Flask React Project
 
 This is the starter for the Flask React project.
