@@ -12,7 +12,7 @@ import SearchSong from "./SearchSong";
 
 
 function HomePage() {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const songObj = useSelector(state => state.songs)
   const [searchResult, setSearchResult] = useState([])
   const [selectedSong, setSelectedSong] = useState(null);
@@ -22,6 +22,7 @@ function HomePage() {
   const handleSearch = async(query) => {
     const response = await fetch(`/api/songs/search?query=${encodeURIComponent(query)}`)
     const songs = await response.json()
+
     setSearchResult(songs)
 
 
@@ -67,7 +68,7 @@ function HomePage() {
             autoPlay
             // src={selectedSong.song_url}
             src={selectedSong.song_url ? selectedSong.song_url : "../../public/demosong.mp3"}
-            
+
           // other props here
           />
         </div>
