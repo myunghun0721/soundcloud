@@ -8,7 +8,7 @@ const WaveForm  = React.memo(({ url, isPlaying }) => {
     const waveformRef = useRef(null)
 
 
-   
+
 
 
 
@@ -22,7 +22,7 @@ const WaveForm  = React.memo(({ url, isPlaying }) => {
     let backendUrl;
 
         if (import.meta.env.MODE === 'production') {
-            backendUrl = 'https://soundcloud-project-m0ku.onrender.com'; // Production URL
+            backendUrl = 'https://soundcloud-gmmf.onrender.com/'; // Production URL
         } else {
             backendUrl = 'http://localhost:8000'; // Development URL
         }
@@ -73,7 +73,7 @@ progressGradient.addColorStop((canvas.height * 0.7 + 2) / canvas.height, '#fffff
 progressGradient.addColorStop((canvas.height * 0.7 + 3) / canvas.height, '#F6B094') // Bottom color
 progressGradient.addColorStop(1, '#F6B094') // Bottom color
 
-       
+
 
         wavesurferRef.current = WaveSurfer.create({
             container: waveformRef.current, //
@@ -100,7 +100,7 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
                 wavesurferRef.current.play()
             }
         })
-      
+
 
         // clean up function
         // so the audio wont stack
@@ -109,13 +109,13 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
                 wavesurferRef.current.destroy()
                 wavesurferRef.current = null
             }
-            
+
         }
-            
+
     }
-    
-    }, []) 
-    
+
+    }, [])
+
     // by using the useEffect when the url change it will trigger re-render
     useEffect (() => {
         if(isReady) {
@@ -146,4 +146,3 @@ progressGradient.addColorStop(1, '#F6B094') // Bottom color
 WaveForm.displayName = "Waveform"
 
 export default WaveForm
-
