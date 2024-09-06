@@ -53,6 +53,7 @@ const SongDetailsHeader = React.memo(({song,user, releaseDate}) => {
             <section className='song-image-container'>
                 <img src={song.preview_img} alt={song.title} className='song-image' />
             </section>
+
             {/* <WaveForm url= {song.song_url} /> */}
 
         </main>
